@@ -78,7 +78,7 @@ ElevatedButton(
     DataColumn(label: Text("Name"), tooltip: "To Display name"),
     DataColumn(label: Text("Description"), tooltip: "To Display description"),
     DataColumn(label: Text("Update"), tooltip: "Update data"),
-
+    DataColumn(label: Text("Delete"), tooltip: "Delete data"),
   ],
   rows: this.categories // accessing list from Getx controller
       .map(
@@ -104,7 +104,25 @@ ElevatedButton(
             ),
           ),
         ),
+       DataCell(
+          IconButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (BuildContext dialogContext) {
 
+                    return MyAlertDialog(
+                        title: 'Delete Alert', content: "Are you sure you want to delete this category",cate:int.parse(user['id'].toString()),context: context);
+                  });
+
+            },
+            icon: Icon(
+              Icons.delete,
+              color: Colors.black,
+            ),
+          ),
+        )
       ],
     ),
   )
@@ -136,4 +154,116 @@ ElevatedButton(
 
 
 
+}
+
+class MyAlertDialog extends StatelessWidget {
+  final String title;
+  final String content;
+  final int cate;
+  final BuildContext context;
+  final List<Widget> actions;
+
+
+  MyAlertDialog({
+    required this.title,
+    required this.content,
+    required this.cate,
+    required this.context,
+    this.actions = const [],
+  });
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        this.title,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      actions: <Widget>[
+        ElevatedButton(
+            child: Text('OK'),
+            onPressed: ()  {
+             delete(cate);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CrudCategory()));
+            })
+
+      ],
+      content: Text(
+        this.content,
+        style: Theme.of(context).textTheme.bodyLarge,
+      ),
+
+    );
+  }
+  void delete(user) {
+    String url = "http://192.168.2.103:8080/Category/Delete/" +
+        user.toString();
+    http.delete(Uri.parse(url))
+        .then((resp) {
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext dialogContext) {
+            var jsonData = json.decode(resp.body);
+            var message = jsonData['message'];
+            return MyAlertDialogSHOW(
+                title: 'Delete Alert',
+                content: message.toString());
+          });
+    }).catchError((error) {
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext dialogContext) {
+            return MyAlertDialogSHOW(
+                title: 'Delete Alert',
+                content: "Failed to delete this category  ");
+          });
+      print(error);
+    });
+  }
+}
+
+
+class MyAlertDialogSHOW extends StatelessWidget {
+  final String title;
+  final String content;
+  final List<Widget> actions;
+
+  MyAlertDialogSHOW({
+    required this.title,
+    required this.content,
+    this.actions = const [],
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        this.title,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      actions: <Widget>[
+        ElevatedButton(
+            child: Text('OK'),
+            onPressed: ()  {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CrudCategory()));
+            })
+
+      ],
+      content: Text(
+        this.content,
+        style: Theme.of(context).textTheme.bodyLarge,
+      ),
+
+    );
+  }
 }
