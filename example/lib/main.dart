@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/CRudCategory.dart';
+import 'package:flutter_map_example/pages/CrudEvent.dart';
 
 import 'package:flutter_map_example/pages/animated_map_controller.dart';
 import 'package:flutter_map_example/pages/circle.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         NetworkTileProviderPage.route: (context) =>
             const NetworkTileProviderPage(),
         CrudCategory.route:(context)=>const CrudCategory(),
+        CrudEvent.route:(context)=>const CrudEvent(),
         WidgetsPage.route: (context) => const WidgetsPage(),
         TapToAddPage.route: (context) => const TapToAddPage(),
         EsriPage.route: (context) => const EsriPage(),

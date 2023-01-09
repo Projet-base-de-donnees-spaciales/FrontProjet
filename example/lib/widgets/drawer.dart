@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map_example/pages/CrudEvent.dart';
 
 import 'package:flutter_map_example/pages/animated_map_controller.dart';
 import 'package:flutter_map_example/pages/circle.dart';
@@ -67,7 +68,7 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
         ),
         _buildMenuItem(
           context,
-          const Text('OpenStreetMap'),
+          const Text('Map whit locations'),
           HomePage.route,
           currentRoute,
         ),
@@ -78,6 +79,12 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           currentRoute,
         ),
         _buildMenuItem(
+          context,
+          const Text('Event'),
+          CrudEvent.route,
+          currentRoute,
+        ),
+        /*_buildMenuItem(
           context,
           const Text('NetworkTileProvider'),
           NetworkTileProviderPage.route,
@@ -94,13 +101,14 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           const Text('Custom CRS'),
           CustomCrsPage.route,
           currentRoute,
-        ),
+        ),*/
         _buildMenuItem(
           context,
           const Text('Add Pins'),
           TapToAddPage.route,
           currentRoute,
         ),
+        /*
         _buildMenuItem(
           context,
           const Text('Esri'),
@@ -196,13 +204,13 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           const Text('Widgets'),
           WidgetsPage.route,
           currentRoute,
-        ),
+        ),*/
         _buildMenuItem(
           context,
-          const Text('Live Location Update'),
+          const Text('Live Location '),
           LiveLocationPage.route,
           currentRoute,
-        ),
+        ),/*
         _buildMenuItem(
           context,
           const Text('Tile loading error handle'),
@@ -278,7 +286,7 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           const Text('Fallback URL AssetTileProvider'),
           FallbackUrlOfflinePage.route,
           currentRoute,
-        ),
+        ),*/
       ],
     ),
   );

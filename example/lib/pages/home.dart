@@ -1,45 +1,37 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_example/widgets/drawer.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 
 class HomePage extends StatelessWidget {
   static const String route = '/';
 
   const HomePage({Key? key}) : super(key: key);
 
+  Future<http.Response> fetchFruit()  {
+    return http.get(Uri.parse("http://192.168.43.215:8080/Evenement/getAll"));
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    final markers = <Marker>[
-      Marker(
-        width: 80,
-        height: 80,
-        point: LatLng(51.5, -0.09),
-        builder: (ctx) => const FlutterLogo(
-          textColor: Colors.blue,
-          key: ObjectKey(Colors.blue),
-        ),
-      ),
-      Marker(
-        width: 80,
-        height: 80,
-        point: LatLng(53.3498, -6.2603),
-        builder: (ctx) => const FlutterLogo(
-          textColor: Colors.green,
-          key: ObjectKey(Colors.green),
-        ),
-      ),
-      Marker(
-        width: 80,
-        height: 80,
-        point: LatLng(48.8566, 2.3522),
-        builder: (ctx) => const FlutterLogo(
-          textColor: Colors.purple,
-          key: ObjectKey(Colors.purple),
-        ),
-      ),
-    ];
 
+    final markers = <Marker>[];
+    markers.add( Marker(
+      width: 80,
+      height: 80,
+      point: LatLng(31.7917, -7.0926),
+      builder: (context) => const Icon(
+        Icons.location_on,
+        color: Colors.red,
+        size: 40,
+      ),
+    ));
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
       drawer: buildDrawer(context, route),
@@ -49,12 +41,12 @@ class HomePage extends StatelessWidget {
           children: [
             const Padding(
               padding: EdgeInsets.only(top: 8, bottom: 8),
-              child: Text('This is a map that is showing (51.5, -0.9).'),
+              child: Text('Selection of localisation'),
             ),
             Flexible(
               child: FlutterMap(
                 options: MapOptions(
-                  center: LatLng(51.5, -0.09),
+                  center: LatLng(31.7917, -7.0926),
                   zoom: 5,
                 ),
                 nonRotatedChildren: [
@@ -66,7 +58,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   TileLayer(
                     urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                     userAgentPackageName: 'dev.fleaflet.flutter_map.example',
                   ),
                   MarkerLayer(markers: markers),

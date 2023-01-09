@@ -7,6 +7,8 @@ import 'package:flutter_map_example/pages/ADDCategory.dart';
 import 'package:flutter_map_example/pages/updateCategory.dart';
 import 'package:http/http.dart' as http;
 
+import '../widgets/drawer.dart';
+
 
 
 
@@ -48,15 +50,9 @@ class _CrudCategoryState extends State<CrudCategory> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Fetch Category',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: Scaffold(
-        appBar: AppBar(
-        title: const Text('Fetch Category'),
-    ),
+    return Scaffold(
+      appBar: AppBar(title: const Text('Fetch Categories')),
+      drawer: buildDrawer(context, CrudCategory.route),
 body:
 Column(
     children: <Widget>[
@@ -129,12 +125,12 @@ ElevatedButton(
       .toList(),
 )
 ]
-),
-        )  );
+));
+
 
     }
   void getCate()  {
-    String url="http://192.168.2.103:8080/Category/getAll";
+    String url="http://172.17.36.37:8080/Category/getAll";
     http.get(Uri.parse(url))
         .then((resp){
 
@@ -201,7 +197,7 @@ class MyAlertDialog extends StatelessWidget {
     );
   }
   void delete(user) {
-    String url = "http://192.168.2.103:8080/Category/Delete/" +
+    String url = "http://172.17.36.37:8080/Category/Delete/" +
         user.toString();
     http.delete(Uri.parse(url))
         .then((resp) {

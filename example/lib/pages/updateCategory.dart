@@ -49,7 +49,8 @@ class _UpdateCategoryState extends State<updateCategory> {
         appBar: AppBar(
         title: const Text('Update Category'),
            ),
-            body: Container(
+            body:
+            Container(
                 child: Padding(
                     padding: EdgeInsets.all(minimumPadding * 2),
                     child: ListView(children: <Widget>[
@@ -108,7 +109,7 @@ class _UpdateCategoryState extends State<updateCategory> {
   void updateEmployees(
       Category employee, BuildContext context)  {
 
-    var Url = "http://192.168.2.103:8080/Category/Update";
+    var Url = "http://172.17.36.37:8080/Category/Update";
     http.put(Uri.parse(Url),headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(employee))
         .then((resp){

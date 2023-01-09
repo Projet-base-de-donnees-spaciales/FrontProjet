@@ -44,7 +44,9 @@ class _ADDCategoryState extends State<ADDCategory> {
             appBar: AppBar(
               title: const Text('ADD Category'),
             ),
-            body: Container(
+            body:
+
+            Container(
                 child: Padding(
                     padding: EdgeInsets.all(minimumPadding * 2),
                     child: ListView(children: <Widget>[
@@ -91,7 +93,9 @@ class _ADDCategoryState extends State<ADDCategory> {
                               category = employees;
                             });
                           })
-                    ]))))
+                    ])))
+
+        )
 
     );
 
@@ -103,7 +107,7 @@ class _ADDCategoryState extends State<ADDCategory> {
   void ADDCate(
       Category employee, BuildContext context)  {
 
-    var Url = "http://192.168.2.103:8080/Category/Add";
+    var Url = "http://172.17.36.37:8080/Category/Add";
     http.post(Uri.parse(Url),headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(employee))
         .then((resp){
