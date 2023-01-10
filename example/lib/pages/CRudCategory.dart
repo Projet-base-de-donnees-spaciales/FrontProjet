@@ -130,7 +130,7 @@ ElevatedButton(
 
     }
   void getCate()  {
-    String url="http://172.17.36.37:8080/Category/getAll";
+    String url="http://192.168.137.232:8080/Category/getAll";
     http.get(Uri.parse(url))
         .then((resp){
 
@@ -197,7 +197,7 @@ class MyAlertDialog extends StatelessWidget {
     );
   }
   void delete(user) {
-    String url = "http://172.17.36.37:8080/Category/Delete/" +
+    String url = "http://192.168.137.232:8080/Category/Delete/" +
         user.toString();
     http.delete(Uri.parse(url))
         .then((resp) {

@@ -107,7 +107,7 @@ class _ADDCategoryState extends State<ADDCategory> {
   void ADDCate(
       Category employee, BuildContext context)  {
 
-    var Url = "http://172.17.36.37:8080/Category/Add";
+    var Url = "http://192.168.137.232:8080/Category/Add";
     http.post(Uri.parse(Url),headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(employee))
         .then((resp){
