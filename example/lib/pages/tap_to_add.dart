@@ -12,23 +12,27 @@ import 'package:intl/intl.dart';
 import 'CRudCategory.dart';
 import 'CRudCategory.dart';
 import 'CrudEvent.dart';
+import 'LoginScreen.dart';
 
 
 
 class TapToAddPage extends StatefulWidget {
   static const String route = '/tap';
-
-  const TapToAddPage({Key? key}) : super(key: key);
+  dynamic idUser;
 
   @override
   State<StatefulWidget> createState() {
-    return TapToAddPageState();
+    return TapToAddPageState(idUser);
   }
+
+  TapToAddPage(this.idUser);
 }
 
 
 class TapToAddPageState extends State<TapToAddPage> {
   dynamic category;
+  dynamic idUser;
+  late dynamic idUserr;
   final minimumPadding = 5.0;
   late List<dynamic> categories;
   String dropdownValue="";
@@ -45,7 +49,10 @@ class TapToAddPageState extends State<TapToAddPage> {
     getCate();
     super.initState();
   }
+  TapToAddPageState(this.idUser){
+    this.idUserr=idUser;
 
+  }
   void getCate(){
 
     http.get(Uri.parse(Param.UrlAllCat))
@@ -87,7 +94,23 @@ class TapToAddPageState extends State<TapToAddPage> {
     ));
 
     return Scaffold(
-        appBar: AppBar(title: const Text('ADD Event')),
+
+        appBar: AppBar(title: const Text('ADD Event'),
+            actions: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: GestureDetector(
+                    onTap: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginScreen()));},
+                    child: Icon(
+                      Icons.logout,
+                      size: 26.0,
+                    ),
+                  )
+              )]
+        ),
         drawer: buildDrawer(context, CrudCategory.route),
     body:
       Column(
@@ -233,9 +256,10 @@ class TapToAddPageState extends State<TapToAddPage> {
     print("Description: "+lastController.text);
 
     Category emp = new Category( name: dropdownValue);
+    User user=new User(id: int.parse(idUserr.toString()));
     Event event=new Event(description: lastController.text,category: emp
         ,point: "POINT("+this.tappedPoints.latitude.toString()+" "+this.tappedPoints.longitude.toString()+")"
-        ,date_expiration: dateController.text,name: nameEvent.text);
+        ,date_expiration: dateController.text,name: nameEvent.text,user: user);
 
 
     http.post(Uri.parse(Param.UrlAddEvent),headers: <String, String>{"Content-Type": "application/json"},
@@ -301,22 +325,28 @@ class Event {
   String? point;
   String? date_expiration;
   String? name;
+  int? id;
+  int ?idPoint;
+  User? user;
 
   //il faut user
 
 
-  Event({this.description, this.category, this.point,this.date_expiration,this.name});
+  Event({this.id,this.description, this.category, this.point,this.idPoint,this.date_expiration,this.name,this.user});
 
   Map<String, dynamic> toJson() => {
+    "id":id,
     "description": description,
     "category": category,
     'point': point,
     'date_expiration':date_expiration,
-    'name':name
+    'idPoint':idPoint,
+    'name':name,
+    'user':user
   };
-  factory Event.fromJson( dynamic json) => Event(
-      description: json['description'].toString(),category: json["category"] as Category, point: json["point"].toString(),
-      date_expiration:json['date_expiration'].toString(),name:json['name'].toString()
+  factory Event.fromJson( dynamic json) => Event(id:int.parse(json['id'].toString()),
+      description: json['description'].toString(),category: json["category"] as Category, point: json["point"].toString(),idPoint:int.parse(json["idPoint"].toString()),
+      date_expiration:json['date_expiration'].toString(),name:json['name'].toString(),user: json['userDTO'] as User
   );
 }
 

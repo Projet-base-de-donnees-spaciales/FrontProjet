@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -6,24 +5,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'package:flutter_map_example/pages/updateEvent.dart';
 import 'package:http/http.dart' as http;
+import '../widgets/CreateurDrawer.dart';
 import '../widgets/drawer.dart';
-import 'CRudCategory.dart';
+import 'CrudEvent.dart';
 import 'LoginScreen.dart';
 import 'Param.dart';
-import 'package:flutter_map_example/pages/CRudCategory.dart';
+import 'TapToAddPageCreateur.dart';
+import 'UpdateCreateur.dart';
 
-
-class CrudEvent extends StatefulWidget {
-  static const String route = 'CrudEvent';
-  const CrudEvent({super.key});
-
+class CreateurEvent extends StatefulWidget {
+  dynamic idUser;
+  static const String route = 'CreateurEvent';
   @override
-  State<CrudEvent> createState() => _CrudEventState();
+  State<StatefulWidget> createState() {
+    return _CreateurState(idUser);
+  }
+
+  CreateurEvent(this.idUser);
 }
 
-class _CrudEventState extends State<CrudEvent> {
+class _CreateurState extends State<CreateurEvent> {
   late List<dynamic> eventes;
+  dynamic idUser;
+ late String idUserr;
+  _CreateurState(this.idUser) {
+   idUserr=idUser.toString();
 
+
+  }
   @override
   void initState() {
     getCate();
@@ -33,8 +42,13 @@ class _CrudEventState extends State<CrudEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         appBar: AppBar(title: const Text('Fetch Events'),
+            leading: GestureDetector(
+              onTap: () { /* Write listener code here */ },
+              child: Icon(
+                Icons.menu,  // add custom icons also
+              ),
+            ),
             actions: <Widget>[
               Padding(
                   padding: EdgeInsets.only(right: 20.0),
@@ -50,7 +64,7 @@ class _CrudEventState extends State<CrudEvent> {
                   )
               )]
         ),
-        drawer: buildDrawer(context, CrudEvent.route),
+
         body:
         Column(
             children: <Widget>[
@@ -60,7 +74,7 @@ class _CrudEventState extends State<CrudEvent> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TapToAddPage(this.eventes.first['userDTO']['id'])));
+                            builder: (context) => TapToAddPageCreateur(idUserr)));
                   }),
 
 
@@ -117,7 +131,7 @@ class _CrudEventState extends State<CrudEvent> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            updateEvent(user)));
+                                            updateCreateur(user)));
                               },
                               icon: Icon(
                                 Icons.edit,
@@ -135,6 +149,7 @@ class _CrudEventState extends State<CrudEvent> {
                                       return MyAlertDialogg(
                                           title: 'Delete Alert',
                                           content: "Are you sure you want to delete this event",
+                                          idUser: idUserr,
                                           cate: int.parse(
                                               user['evenementDTO']['id'].toString()),
                                           context: context);
@@ -156,7 +171,7 @@ class _CrudEventState extends State<CrudEvent> {
   }
   void getCate() {
 
-    http.get(Uri.parse(Param.UrlAllEvent))
+    http.get(Uri.parse(Param.UrlAllEventUser+idUserr.toString()))
         .then((resp) {
       setState(() {
         var jsonData = json.decode(resp.body);
@@ -168,74 +183,79 @@ class _CrudEventState extends State<CrudEvent> {
     });
   }
 }
-    class MyAlertDialogg extends StatelessWidget {
-    final String title;
-    final String content;
-    final int cate;
-    final BuildContext context;
-    final List<Widget> actions;
+class MyAlertDialogg extends StatelessWidget {
+  final String title;
+  final String content;
+  final int cate;
+  final BuildContext context;
+  final List<Widget> actions;
+  final String idUser;
 
 
-    MyAlertDialogg({
+  MyAlertDialogg({
     required this.title,
     required this.content,
     required this.cate,
     required this.context,
     this.actions = const [],
-    });
+    required this.idUser
+  });
 
 
 
-    @override
-    Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return AlertDialog(
-    title: Text(
-    this.title,
-    style: Theme.of(context).textTheme.titleLarge,
-    ),
-    actions: <Widget>[
-    ElevatedButton(
-    child: Text('OK'),
-    onPressed: ()  {
-      print(cate);
-      deleteEvent(cate);
+      title: Text(
+        this.title,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      actions: <Widget>[
+        ElevatedButton(
+            child: Text('OK'),
+            onPressed: ()  {
+              print(cate);
+              deleteEvent(cate);
 
-    })
+            })
 
-    ],
-    content: Text(
-    this.content,
-    style: Theme.of(context).textTheme.bodyLarge,
-    ),
+      ],
+      content: Text(
+        this.content,
+        style: Theme.of(context).textTheme.bodyLarge,
+      ),
 
     );
-    }
-    void deleteEvent(user) {
+  }
+  void deleteEvent(user) {
     http.delete(Uri.parse(Param.UrlDeleteEvent+user.toString()))
         .then((resp) {
-    showDialog(
-    context: context,
-    barrierDismissible: true,
-    builder: (BuildContext dialogContext) {
-    var jsonData = json.decode(resp.body);
-    var message = jsonData['message'];
-    return MyAlertDialogSHOWWW(
-    title: 'Delete Alert',
-    content: message.toString());
-    });
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext dialogContext) {
+            var jsonData = json.decode(resp.body);
+            var message = jsonData['message'];
+            return MyAlertDialogSHOWWW(
+                title: 'Delete Alert',
+                content: message.toString(), idUser: idUser,
+            );
+          });
     }).catchError((error) {
-    showDialog(
-    context: context,
-    barrierDismissible: true,
-    builder: (BuildContext dialogContext) {
-    return MyAlertDialogSHOWWW(
-    title: 'Delete Alert',
-    content: "Failed to delete this Event  ");
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext dialogContext) {
+            return MyAlertDialogSHOWWW(
+                title: 'Delete Alert',
+                content: "Failed to delete this Event  ",
+            idUser: idUser,
+            );
+          });
+      print(error);
     });
-    print(error);
-    });
-    }
-    }
+  }
+}
 
 
 
@@ -243,11 +263,13 @@ class MyAlertDialogSHOWWW extends StatelessWidget {
   final String title;
   final String content;
   final List<Widget> actions;
+  final String idUser;
 
   MyAlertDialogSHOWWW({
     required this.title,
     required this.content,
     this.actions = const [],
+    required this.idUser
   });
 
   @override
@@ -264,7 +286,7 @@ class MyAlertDialogSHOWWW extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => CrudEvent()));
+                      builder: (context) => CreateurEvent(idUser)));
             })
 
       ],

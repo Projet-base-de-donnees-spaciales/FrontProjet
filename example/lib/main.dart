@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/CRudCategory.dart';
+import 'package:flutter_map_example/pages/CreateurEvent.dart';
 import 'package:flutter_map_example/pages/CrudEvent.dart';
+import 'package:flutter_map_example/pages/LoginScreen.dart';
 
 import 'package:flutter_map_example/pages/animated_map_controller.dart';
 import 'package:flutter_map_example/pages/circle.dart';
@@ -49,18 +51,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Map Example',
+      title: 'Event.Com',
       theme: ThemeData(
         primarySwatch: mapBoxBlue,
       ),
-      home: const HomePage(),
+      home: const LoginScreen(),
       routes: <String, WidgetBuilder>{
         NetworkTileProviderPage.route: (context) =>
             const NetworkTileProviderPage(),
         CrudCategory.route:(context)=>const CrudCategory(),
         CrudEvent.route:(context)=>const CrudEvent(),
         WidgetsPage.route: (context) => const WidgetsPage(),
-        TapToAddPage.route: (context) => const TapToAddPage(),
         EsriPage.route: (context) => const EsriPage(),
         PolylinePage.route: (context) => const PolylinePage(),
         MapControllerPage.route: (context) => const MapControllerPage(),

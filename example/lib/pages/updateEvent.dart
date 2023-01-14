@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_example/pages/LoginScreen.dart';
 
 import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
 
 import 'CRudCategory.dart';
 import 'Param.dart';
@@ -71,9 +73,23 @@ class _UpdateEventState extends State<updateEvent> {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
-            appBar: AppBar(
-              title: const Text('Update Event'),
-            ),
+
+          appBar: AppBar(title: const Text('Update Event'),
+              actions: <Widget>[
+                Padding(
+                    padding: EdgeInsets.only(right: 20.0),
+                    child: GestureDetector(
+                      onTap: () { Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));},
+                      child: Icon(
+                        Icons.logout,
+                        size: 26.0,
+                      ),
+                    )
+                )]
+          ),
             body:
             Column(
             children: <Widget>[
@@ -178,15 +194,9 @@ class _UpdateEventState extends State<updateEvent> {
               Flexible(
                 child: FlutterMap(
                   options: MapOptions(
-                    center: CenterMap,
-                    zoom: 5,
-                  ),
-                  nonRotatedChildren: [
-                    AttributionWidget.defaultWidget(
-                      source: 'OpenStreetMap contributors',
-                      onSourceTapped: () {},
-                    ),
-                  ],
+                      center: CenterMap,
+                      zoom: 5,
+                      onTap: _handleTap),
                   children: [
                     TileLayer(
                       urlTemplate:
@@ -196,8 +206,9 @@ class _UpdateEventState extends State<updateEvent> {
                     MarkerLayer(markers: markers),
                   ],
                 ),
-              )
-   , ElevatedButton(
+              ),
+
+    ElevatedButton(
     child: Text('ADD'),
     onPressed: ()  {
     Updateevent(context);
@@ -222,7 +233,11 @@ class _UpdateEventState extends State<updateEvent> {
 
   }
 
-
+  void _handleTap(TapPosition tapPosition, LatLng latlng) {
+    setState(() {
+      CenterMap=latlng;
+    });
+  }
   void getCate(){
 
     http.get(Uri.parse(Param.UrlAllCat))
@@ -248,9 +263,12 @@ class _UpdateEventState extends State<updateEvent> {
 
   void Updateevent(BuildContext context)  {
     Category emp = new Category( name: dropdownValue);
-    Event event=new Event(description: lastController.text,category: emp
-       // ,point: "POINT("+this.tappedPoints.latitude.toString()+" "+this.tappedPoints.longitude.toString()+")"
-        ,date_expiration: dateController.text,name: nameEvent.text);
+    print("POINT("+this.CenterMap.latitude.toString()+" "+this.CenterMap.longitude.toString()+")");
+    print(int.parse(this.event['id'].toString()));
+    User user=new User(id:int.parse(this.event['evenementDTO']['userDTO']['id'].toString()));
+    Event event=new Event(id:int.parse(this.event['evenementDTO']['id'].toString()),description: lastController.text,category: emp
+        ,point: "POINT("+this.CenterMap.latitude.toString()+" "+this.CenterMap.longitude.toString()+")",idPoint:int.parse(this.event['id'].toString())
+        ,date_expiration: dateController.text,name: nameEvent.text,user:user );
 
     http.put(Uri.parse(Param.UrlUpdateEvent),headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(event))
