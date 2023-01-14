@@ -14,7 +14,7 @@ import 'package:flutter_map_example/pages/CRudCategory.dart';
 
 
 class CrudEvent extends StatefulWidget {
-  static const String route = 'CrudEventtt';
+  static const String route = 'CrudEvent';
   const CrudEvent({super.key});
 
   @override
@@ -35,24 +35,7 @@ class _CrudEventState extends State<CrudEvent> {
     return Scaffold(
 
 
-        appBar: AppBar(title: const Text('Fetch Events'),
-            actions: <Widget>[
-              Padding(
-                  padding: EdgeInsets.only(right: 20.0),
-                  child: GestureDetector(
-                    onTap: () { Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LoginScreen()));},
-                    child: Icon(
-                      Icons.logout,
-                      size: 26.0,
-                    ),
-                  )
-              )]
-        ),
-
-
+        appBar: AppBar(title: const Center(child: Text('Events.com'))),
         drawer: buildDrawer(context, CrudEvent.route),
         body:
         Center(

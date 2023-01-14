@@ -67,7 +67,6 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           ),
         ),
         _buildMenuItem(
-          context,
           const Text("Page d'cceuil",style: TextStyle(fontSize: 25.0)),
           HomePage.route,
           currentRoute,
