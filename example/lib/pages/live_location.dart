@@ -118,21 +118,11 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      drawer: buildDrawer(context, LiveLocationPage.route),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
-              child: _serviceError!.isEmpty
-                  ? Text('Your location is '
-                  '(${currentLatLng.latitude}, ${currentLatLng.longitude}).')
-                  : Text(
-                  'Error occured while acquiring location. Error Message : '
-                      '$_serviceError'),
-            ),
+
             Flexible(
               child: FlutterMap(
                 mapController: _mapController,
@@ -155,31 +145,6 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
           ],
         ),
       ),
-      floatingActionButton: Builder(builder: (BuildContext context) {
-        return FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              _liveUpdate = !_liveUpdate;
-
-              if (_liveUpdate) {
-                interActiveFlags = InteractiveFlag.rotate |
-                InteractiveFlag.pinchZoom |
-                InteractiveFlag.doubleTapZoom;
-
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text(
-                      'In live update mode only zoom and rotation are enable'),
-                ));
-              } else {
-                interActiveFlags = InteractiveFlag.all;
-              }
-            });
-          },
-          child: _liveUpdate
-              ? const Icon(Icons.location_on)
-              : const Icon(Icons.location_off),
-        );
-      }),
     );
   }
 }

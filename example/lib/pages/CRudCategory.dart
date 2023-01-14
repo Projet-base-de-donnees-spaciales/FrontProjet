@@ -52,82 +52,107 @@ class _CrudCategoryState extends State<CrudCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Fetch Categories')),
+      appBar: AppBar(title: const Center(child: Text('Events.com'))),
       drawer: buildDrawer(context, CrudCategory.route),
 body:
-Column(
+    Center(
+    child: Column(
     children: <Widget>[
-ElevatedButton(
-    child: Text('ADD New Category'),
-    onPressed: ()  {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ADDCategory()));
-    }),
+      const ListTile(
+          title:  Center(child:  Text("Gestion des catégories \n",
+            style:  TextStyle(
+                 fontSize: 45 , color: Colors.black),
+          )),
+      ),
+      SizedBox(
+            width: 250, // <-- Your width
+            height: 50, // <-- Your height
+            child:  ElevatedButton.icon(
+              icon: const Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 30.0,
+              ),
+              label: const Text('Ajouter nouvelle catégorie'),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ADDCategory()));
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green,
+                //onPrimary: Colors.black,
+              ),
+            )
 
+        ),
+      const ListTile(
+        title:  Center(child:  Text("\n")),
+        ),
+      DataTable(
+          onSelectAll: (b) {},
+          sortColumnIndex: 0,
+          sortAscending: true,
+          headingRowColor:
+          MaterialStateColor.resolveWith((states) => Colors.blue),
+          columns: <DataColumn>[
+            DataColumn(label: Text("Name" , style:  TextStyle(color: Colors.white)), tooltip: "Nom"),
+            DataColumn(label: Text("Description" , style:  TextStyle(color: Colors.white)), tooltip: "Description"),
+            DataColumn(label: Text("Modifier", style:  TextStyle(color: Colors.white)), tooltip: "Modifier"),
+            DataColumn(label: Text("Supprimer", style:  TextStyle(color: Colors.white)), tooltip: "Supprimer"),
+          ],
+          rows: this.categories // accessing list from Getx controller
+              .map(
+                (user) => DataRow(
+              cells: [
+                DataCell(
+                  Text(user['name'].toString()),
+                ),
+                DataCell(
+                  Text(user['description'].toString()),
+                ),
+                DataCell(
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => updateCategory(user)));
+                    },
+                    icon: Icon(
+                      Icons.edit,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+               DataCell(
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (BuildContext dialogContext) {
 
-    DataTable(
-  onSelectAll: (b) {},
-  sortColumnIndex: 0,
-  sortAscending: true,
-  columns: <DataColumn>[
-    DataColumn(label: Text("Name"), tooltip: "To Display name"),
-    DataColumn(label: Text("Description"), tooltip: "To Display description"),
-    DataColumn(label: Text("Update"), tooltip: "Update data"),
-    DataColumn(label: Text("Delete"), tooltip: "Delete data"),
-  ],
-  rows: this.categories // accessing list from Getx controller
-      .map(
-        (user) => DataRow(
-      cells: [
-        DataCell(
-          Text(user['name'].toString()),
-        ),
-        DataCell(
-          Text(user['description'].toString()),
-        ),
-        DataCell(
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => updateCategory(user)));
-            },
-            icon: Icon(
-              Icons.edit,
-              color: Colors.black,
+                            return MyAlertDialog(
+                                title: 'Suppression du catégorie', content: "Vous voulez vraiment supprimer cette catégorie ?",cate:int.parse(user['id'].toString()),context: context);
+                          });
+
+                    },
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                  ),
+                )
+              ],
             ),
-          ),
-        ),
-       DataCell(
-          IconButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  barrierDismissible: true,
-                  builder: (BuildContext dialogContext) {
-
-                    return MyAlertDialog(
-                        title: 'Delete Alert', content: "Are you sure you want to delete this category",cate:int.parse(user['id'].toString()),context: context);
-                  });
-
-            },
-            icon: Icon(
-              Icons.delete,
-              color: Colors.black,
-            ),
-          ),
+          )
+              .toList(),
         )
-      ],
-    ),
-  )
-      .toList(),
-)
 ]
-));
-
+))
+    );
 
     }
   void getCate()  {
@@ -217,7 +242,7 @@ class MyAlertDialog extends StatelessWidget {
           barrierDismissible: true,
           builder: (BuildContext dialogContext) {
             return MyAlertDialogSHOW(
-                title: 'Delete Alert',
+                title: 'Suppression du catégorie',
                 content: "Failed to delete this category  ");
           });
       print(error);

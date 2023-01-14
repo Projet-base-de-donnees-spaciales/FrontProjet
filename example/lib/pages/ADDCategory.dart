@@ -44,58 +44,57 @@ class _ADDCategoryState extends State<ADDCategory> {
         ),
         home: Scaffold(
             appBar: AppBar(
-              title: const Text('ADD Category'),
+              title: const Center( child: Text('Ajouter catégorie')),
             ),
             body:
+            Center(
+            child: Padding(
+                padding: EdgeInsets.all(minimumPadding * 2),
+                child: ListView(children: <Widget>[
 
-            Container(
-                child: Padding(
-                    padding: EdgeInsets.all(minimumPadding * 2),
-                    child: ListView(children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.only(
+                          top: minimumPadding, bottom: minimumPadding),
+                      child: TextFormField(
+                        style: textStyle,
+                        controller: firstController,
 
-                      Padding(
-                          padding: EdgeInsets.only(
-                              top: minimumPadding, bottom: minimumPadding),
-                          child: TextFormField(
-                            style: textStyle,
-                            controller: firstController,
+                        decoration: InputDecoration(
+                            labelText: ' Nom',
+                            hintText: 'Saisir le nom du catégorie',
+                            labelStyle: textStyle,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0))),
+                      )),
+                  Padding(
+                      padding: EdgeInsets.only(
+                          top: minimumPadding, bottom: minimumPadding),
+                      child: TextFormField(
+                        style: textStyle,
+                        controller: lastController,
+                        /*validator: (String value) {
+                          if (value.isEmpty) {
+                            return 'please enter your name';
+                          }
+                        },*/
+                        decoration: InputDecoration(
+                            labelText: 'Description',
+                            hintText: 'Saisir la description du catégorie',
+                            labelStyle: textStyle,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0))),
+                      )),
+                  ElevatedButton(
+                      child: Text('Ajouter'),
+                      onPressed: ()  {
 
-                            decoration: InputDecoration(
-                                labelText: ' Name',
-                                hintText: 'Enter Name of category',
-                                labelStyle: textStyle,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          )),
-                      Padding(
-                          padding: EdgeInsets.only(
-                              top: minimumPadding, bottom: minimumPadding),
-                          child: TextFormField(
-                            style: textStyle,
-                            controller: lastController,
-                            /*validator: (String value) {
-                              if (value.isEmpty) {
-                                return 'please enter your name';
-                              }
-                            },*/
-                            decoration: InputDecoration(
-                                labelText: 'Description',
-                                hintText: 'Enter Description of category',
-                                labelStyle: textStyle,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          )),
-                      ElevatedButton(
-                          child: Text('ADD'),
-                          onPressed: ()  {
-
-                            Category emp = new Category( name: firstController.text, description:lastController.text);
-                            ADDCate(emp, context);
-                            setState(() {
-                              category = employees;
-                            });
-                          })
-                    ])))
+                        Category emp = new Category( name: firstController.text, description:lastController.text);
+                        ADDCate(emp, context);
+                        setState(() {
+                          category = employees;
+                        });
+                      })
+                ])))
 
         )
 

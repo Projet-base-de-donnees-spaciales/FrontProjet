@@ -49,7 +49,7 @@ class _UpdateCategoryState extends State<updateCategory> {
         ),
         home: Scaffold(
         appBar: AppBar(
-        title: const Text('Update Category'),
+        title: const Center( child: Text('Modier catégorie')),
            ),
             body:
             Container(
@@ -65,8 +65,8 @@ class _UpdateCategoryState extends State<updateCategory> {
                             controller: firstController,
 
                             decoration: InputDecoration(
-                                labelText: 'First Name',
-                                hintText: 'Enter Your First Name',
+                                labelText: 'Nom',
+                                hintText: 'Saisir le nom',
                                 labelStyle: textStyle,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0))),
@@ -83,14 +83,14 @@ class _UpdateCategoryState extends State<updateCategory> {
                               }
                             },*/
                             decoration: InputDecoration(
-                                labelText: 'Last Name',
-                                hintText: 'Enter Your First Name',
+                                labelText: 'Description',
+                                hintText: 'Saisir decription',
                                 labelStyle: textStyle,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0))),
                           )),
                       ElevatedButton(
-                          child: Text('Update Details'),
+                          child: Text('Modifier catégorie'),
                           onPressed: ()  {
 
                             Category emp = new Category(id: int.parse(category['id'].toString()), name: firstController.text, description:lastController.text);

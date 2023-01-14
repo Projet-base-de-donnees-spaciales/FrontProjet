@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: mapBoxBlue,
       ),
-      home: const LoginScreen(),
+      home: const HomePage(),
       routes: <String, WidgetBuilder>{
         NetworkTileProviderPage.route: (context) =>
             const NetworkTileProviderPage(),
