@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'package:flutter_map_example/pages/updateEvent.dart';
 import 'package:http/http.dart' as http;
-import '../widgets/drawer.dart';
 import 'CRudCategory.dart';
 import 'LoginScreen.dart';
 import 'Param.dart';
@@ -14,7 +13,10 @@ import 'package:flutter_map_example/pages/CRudCategory.dart';
 
 
 class CrudEvent extends StatefulWidget {
+
   static const String route = 'CrudEvent';
+
+
   const CrudEvent({super.key});
 
   @override
@@ -35,8 +37,55 @@ class _CrudEventState extends State<CrudEvent> {
     return Scaffold(
 
 
-        appBar: AppBar(title: const Center(child: Text('Events.com'))),
-        drawer: buildDrawer(context, CrudEvent.route),
+        appBar: AppBar(title: const Center(child: Text('Events.com')),
+            actions: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(right: 20.0,top: 11),
+                  child: GestureDetector(
+                    onTap: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CrudCategory()));},
+                    child: const Text("Catégorie",style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.white,
+                      decorationColor: Colors.redAccent,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                    )),
+                  )
+              ),
+              Padding(
+                  padding: EdgeInsets.only(right: 20.0,top: 11),
+                  child: GestureDetector(
+                    onTap: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          //Page
+                            builder: (context) => CrudCategory()));},
+                    child: const Text("Users",style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.white,
+                      decorationColor: Colors.redAccent,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                      )),
+                  )
+              )
+              ,Padding(
+                  padding: const EdgeInsets.only(right: 40.0,top: 11),
+                  child: GestureDetector(
+                    onTap: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginScreen()));},
+                    child: const Icon(
+                      Icons.logout_rounded,
+                      size: 26.0,
+                    ),
+                  )
+              )]
+        ),
         body:
         Center(
         child: Column(
@@ -62,7 +111,7 @@ class _CrudEventState extends State<CrudEvent> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TapToAddPage(this.eventes.first['userDTO']['id'])));
+                              builder: (context) => TapToAddPage(this.eventes.first['evenementDTO']['userDTO']['id'])));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,

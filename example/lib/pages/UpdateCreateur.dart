@@ -74,10 +74,10 @@ class _UpdateEventState extends State<updateCreateur> {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
-            appBar: AppBar(title: const Text('Update Event'),
+            appBar: AppBar(title: const Center( child: Text('Modifier événements')),
                 actions: <Widget>[
                   Padding(
-                      padding: EdgeInsets.only(right: 20.0),
+                      padding: EdgeInsets.only(right: 40.0,top: 11),
                       child: GestureDetector(
                         onTap: () { Navigator.push(
                             context,

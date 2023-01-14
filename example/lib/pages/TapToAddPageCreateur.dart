@@ -11,7 +11,7 @@ import 'package:flutter_map_example/pages/CRudCategory.dart';
 import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
-import '../widgets/CreateurDrawer.dart';
+
 import 'CRudCategory.dart';
 import 'CRudCategory.dart';
 import 'CrudEvent.dart';
@@ -99,10 +99,10 @@ class TapToAddPageState extends State<TapToAddPageCreateur> {
     ));
 
     return Scaffold(
-        appBar: AppBar(title: const Text('ADD Event'),
+        appBar: AppBar(title: const Center(child: Text('Events.com')),
             actions: <Widget>[
             Padding(
-            padding: EdgeInsets.only(right: 20.0),
+            padding: EdgeInsets.only(right: 40.0,top: 11),
         child: GestureDetector(
           onTap: () { Navigator.push(
               context,

@@ -96,10 +96,10 @@ class TapToAddPageState extends State<TapToAddPage> {
     return Scaffold(
 
 
-        appBar: AppBar(title: const Text('ADD Event'),
+        appBar: AppBar(title: const Center(child: Text('Events.com')),
             actions: <Widget>[
               Padding(
-                  padding: EdgeInsets.only(right: 20.0),
+                  padding: EdgeInsets.only(right: 40.0,top: 11),
                   child: GestureDetector(
                     onTap: () { Navigator.push(
                         context,

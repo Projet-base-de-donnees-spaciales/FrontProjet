@@ -107,16 +107,16 @@ class _UpdateEventState extends State<updateEvent> {
         home: Scaffold(
 
 
-          appBar: AppBar(title: const Text('Modifier événement'),
+          appBar: AppBar(title: const Center( child: Text('Modifier événement')),
               actions: <Widget>[
                 Padding(
-                    padding: EdgeInsets.only(right: 20.0),
+                    padding: EdgeInsets.only(right: 40.0,top: 11),
                     child: GestureDetector(
                       onTap: () { Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => LoginScreen()));},
-                      child: Icon(
+                      child: const Icon(
                         Icons.logout,
                         size: 26.0,
                       ),

@@ -89,7 +89,7 @@ class HomePage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        drawer: buildDrawer(context, HomePage.route),
+        appBar: AppBar(title: const Center(child: Text('Events.com'))),
         body: const MyCardWidget(),
       ),
     );
