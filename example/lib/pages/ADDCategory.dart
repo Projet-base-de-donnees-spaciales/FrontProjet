@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/CRudCategory.dart';
 import 'package:http/http.dart' as http;
 
+import 'Param.dart';
+
 class ADDCategory extends StatefulWidget {
 
   static const String route = 'ADDCategory';
@@ -107,8 +109,9 @@ class _ADDCategoryState extends State<ADDCategory> {
   void ADDCate(
       Category employee, BuildContext context)  {
 
-    var Url = "http://192.168.137.232:8080/Category/Add";
-    http.post(Uri.parse(Url),headers: <String, String>{"Content-Type": "application/json"},
+
+
+    http.post(Uri.parse(Param.UrlAddCat),headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(employee))
         .then((resp){
       showDialog(

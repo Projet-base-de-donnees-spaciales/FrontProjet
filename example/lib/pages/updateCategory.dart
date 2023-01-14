@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/CRudCategory.dart';
 import 'package:http/http.dart' as http;
 
+import 'Param.dart';
+
 class updateCategory extends StatefulWidget {
   dynamic category;
   static const String route = 'updateCategory';
@@ -109,8 +111,7 @@ class _UpdateCategoryState extends State<updateCategory> {
   void updateEmployees(
       Category employee, BuildContext context)  {
 
-    var Url = "http://192.168.137.232:8080/Category/Update";
-    http.put(Uri.parse(Url),headers: <String, String>{"Content-Type": "application/json"},
+    http.put(Uri.parse(Param.UrlUpdateCat),headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(employee))
         .then((resp){
       showDialog(

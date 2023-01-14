@@ -7,7 +7,10 @@ import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'package:flutter_map_example/pages/updateEvent.dart';
 import 'package:http/http.dart' as http;
 import '../widgets/drawer.dart';
+import 'CRudCategory.dart';
+import 'Param.dart';
 import 'package:flutter_map_example/pages/CRudCategory.dart';
+
 
 class CrudEvent extends StatefulWidget {
   static const String route = 'CrudEvent';
@@ -134,10 +137,9 @@ class _CrudEventState extends State<CrudEvent> {
             ]
         ));
   }
-
   void getCate() {
-    String url = "http://192.168.137.81:8080/Evenement/getAll";
-    http.get(Uri.parse(url))
+
+    http.get(Uri.parse(Param.UrlAllEvent))
         .then((resp) {
       setState(() {
         var jsonData = json.decode(resp.body);
@@ -192,10 +194,7 @@ class _CrudEventState extends State<CrudEvent> {
     );
     }
     void deleteEvent(user) {
-      print("i am here");
-    String url = "http://192.168.137.81:8080/Evenement/Delete/" + user.toString();
-    print(url);
-    http.delete(Uri.parse(url))
+    http.delete(Uri.parse(Param.UrlDeleteEvent+user.toString()))
         .then((resp) {
     showDialog(
     context: context,

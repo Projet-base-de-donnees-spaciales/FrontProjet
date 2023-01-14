@@ -8,6 +8,7 @@ import 'package:flutter_map_example/pages/updateCategory.dart';
 import 'package:http/http.dart' as http;
 
 import '../widgets/drawer.dart';
+import 'Param.dart';
 
 
 
@@ -130,8 +131,9 @@ ElevatedButton(
 
     }
   void getCate()  {
-    String url="http://192.168.137.232:8080/Category/getAll";
-    http.get(Uri.parse(url))
+
+
+    http.get(Uri.parse(Param.UrlAllCat))
         .then((resp){
 
       setState((){
@@ -197,9 +199,7 @@ class MyAlertDialog extends StatelessWidget {
     );
   }
   void delete(user) {
-    String url = "http://192.168.137.232:8080/Category/Delete/" +
-        user.toString();
-    http.delete(Uri.parse(url))
+    http.delete(Uri.parse(Param.UrlDeleteCat+ user.toString()))
         .then((resp) {
       showDialog(
           context: context,

@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 
 import 'CRudCategory.dart';
+import 'Param.dart';
 
 class updateEvent extends StatefulWidget {
   dynamic event;
@@ -223,8 +224,8 @@ class _UpdateEventState extends State<updateEvent> {
 
 
   void getCate(){
-    String url="http://192.168.137.81:8080/Category/getAll";
-    http.get(Uri.parse(url))
+
+    http.get(Uri.parse(Param.UrlAllCat))
         .then((resp){
 
       setState((){
@@ -250,8 +251,8 @@ class _UpdateEventState extends State<updateEvent> {
     Event event=new Event(description: lastController.text,category: emp
        // ,point: "POINT("+this.tappedPoints.latitude.toString()+" "+this.tappedPoints.longitude.toString()+")"
         ,date_expiration: dateController.text,name: nameEvent.text);
-    var Url = "http://172.17.36.37:8080/Evenement/Update";
-    http.put(Uri.parse(Url),headers: <String, String>{"Content-Type": "application/json"},
+
+    http.put(Uri.parse(Param.UrlUpdateEvent),headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(event))
         .then((resp){
       showDialog(
