@@ -4,10 +4,12 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/ADDCategory.dart';
+import 'package:flutter_map_example/pages/CrudEvent.dart';
 import 'package:flutter_map_example/pages/updateCategory.dart';
 import 'package:http/http.dart' as http;
 
 import '../widgets/drawer.dart';
+import 'LoginScreen.dart';
 import 'Param.dart';
 
 
@@ -52,7 +54,43 @@ class _CrudCategoryState extends State<CrudCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Center(child: Text('Events.com'))),
+
+        appBar: AppBar(title: const Text('Fetch Categories'),
+            actions: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: GestureDetector(
+                    onTap: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CrudEvent()));},
+                    child: Text("evenement"),
+                  )
+              ),
+              Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: GestureDetector(
+                    onTap: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CrudEvent()));},
+                    child: Text("Users"),
+                  )
+              )
+              ,Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: GestureDetector(
+                    onTap: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginScreen()));},
+                    child: Icon(
+                      Icons.logout,
+                      size: 26.0,
+                    ),
+                  )
+              )]
+        ),
       drawer: buildDrawer(context, CrudCategory.route),
 body:
     Center(

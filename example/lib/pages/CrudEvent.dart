@@ -14,7 +14,7 @@ import 'package:flutter_map_example/pages/CRudCategory.dart';
 
 
 class CrudEvent extends StatefulWidget {
-  static const String route = 'CrudEventtt';
+  static const String route = '/CrudEventtt';
   const CrudEvent({super.key});
 
   @override
@@ -34,10 +34,30 @@ class _CrudEventState extends State<CrudEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-
         appBar: AppBar(title: const Text('Fetch Events'),
             actions: <Widget>[
               Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: GestureDetector(
+                    onTap: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CrudCategory()));},
+                    child: Text("Categorie"),
+                  )
+              ),
+              Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: GestureDetector(
+                    onTap: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          //Page
+                            builder: (context) => CrudCategory()));},
+                    child: Text("Users"),
+                  )
+              )
+              ,Padding(
                   padding: EdgeInsets.only(right: 20.0),
                   child: GestureDetector(
                     onTap: () { Navigator.push(
@@ -51,7 +71,6 @@ class _CrudEventState extends State<CrudEvent> {
                   )
               )]
         ),
-
 
         drawer: buildDrawer(context, CrudEvent.route),
         body:
@@ -79,7 +98,7 @@ class _CrudEventState extends State<CrudEvent> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TapToAddPage(this.eventes.first['userDTO']['id'])));
+                              builder: (context) => TapToAddPage(this.eventes.first['evenementDTO']['userDTO']['id'])));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,

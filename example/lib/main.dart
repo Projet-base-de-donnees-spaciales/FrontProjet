@@ -57,16 +57,14 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomePage(),
       routes: <String, WidgetBuilder>{
-        NetworkTileProviderPage.route: (context) =>
-            const NetworkTileProviderPage(),
+        NetworkTileProviderPage.route: (context) => const NetworkTileProviderPage(),
         CrudCategory.route:(context)=>const CrudCategory(),
         CrudEvent.route:(context)=>const CrudEvent(),
         WidgetsPage.route: (context) => const WidgetsPage(),
         EsriPage.route: (context) => const EsriPage(),
         PolylinePage.route: (context) => const PolylinePage(),
         MapControllerPage.route: (context) => const MapControllerPage(),
-        AnimatedMapControllerPage.route: (context) =>
-            const AnimatedMapControllerPage(),
+        AnimatedMapControllerPage.route: (context) => const AnimatedMapControllerPage(),
         MarkerAnchorPage.route: (context) => const MarkerAnchorPage(),
         PluginScaleBar.route: (context) => const PluginScaleBar(),
         PluginZoomButtons.route: (context) => const PluginZoomButtons(),

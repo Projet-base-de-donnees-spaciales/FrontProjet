@@ -84,7 +84,7 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           CrudEvent.route,
           currentRoute,
         ),
-        /*_buildMenuItem(
+        /* _buildMenuItem(
           context,
           const Text('NetworkTileProvider'),
           NetworkTileProviderPage.route,
