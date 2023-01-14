@@ -175,10 +175,8 @@ class TapToAddPageState extends State<TapToAddPage> {
                   String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
                   print(formattedDate); //formatted date output using intl package =>  2022-07-04
                   //You can format date as per your need
-
                   setState(() {
                     dateController.text = formattedDate; //set foratted date to TextField value.
-
                   });
                   print(dateController.text);
                 }else{
@@ -186,8 +184,6 @@ class TapToAddPageState extends State<TapToAddPage> {
                 }
               },
             )
-
-
             ,Flexible(
               child: FlutterMap(
                 options: MapOptions(
@@ -208,7 +204,6 @@ class TapToAddPageState extends State<TapToAddPage> {
                 child: Text('ADD'),
                 onPressed: ()  {
                 ADDevent();
-
                 })
      /* Padding(
         padding: const EdgeInsets.all(8),
@@ -218,7 +213,6 @@ class TapToAddPageState extends State<TapToAddPage> {
               padding: EdgeInsets.only(top: 8, bottom: 8),
               child: Text('Tap your location'),
             ),
-
           ],
         ),
       ),])*/
@@ -259,11 +253,6 @@ class TapToAddPageState extends State<TapToAddPage> {
     }).catchError((error){
     print(error);
     });
-
-
-
-
-
   }
 }
 class MyAlertDialogSHOWW extends StatelessWidget {
