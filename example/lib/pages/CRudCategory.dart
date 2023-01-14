@@ -132,6 +132,7 @@ ElevatedButton(
     }
   void getCate()  {
 
+
     http.get(Uri.parse(Param.UrlAllCat))
         .then((resp){
 
@@ -198,8 +199,7 @@ class MyAlertDialog extends StatelessWidget {
     );
   }
   void delete(user) {
-    String url = Param.UrlDeleteCat + user.toString();
-    http.delete(Uri.parse(url))
+    http.delete(Uri.parse(Param.UrlDeleteCat+ user.toString()))
         .then((resp) {
       showDialog(
           context: context,

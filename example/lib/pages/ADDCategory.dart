@@ -109,6 +109,8 @@ class _ADDCategoryState extends State<ADDCategory> {
   void ADDCate(
       Category employee, BuildContext context)  {
 
+
+
     http.post(Uri.parse(Param.UrlAddCat),headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(employee))
         .then((resp){

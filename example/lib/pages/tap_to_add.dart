@@ -11,6 +11,7 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'CRudCategory.dart';
 import 'CRudCategory.dart';
+import 'CrudEvent.dart';
 
 
 
@@ -46,6 +47,7 @@ class TapToAddPageState extends State<TapToAddPage> {
   }
 
   void getCate(){
+
     http.get(Uri.parse(Param.UrlAllCat))
         .then((resp){
 
@@ -59,7 +61,9 @@ class TapToAddPageState extends State<TapToAddPage> {
          list.add(categories[i]['name'].toString()) ;
          print(categories[i]['name'].toString());
        }
-
+        setState((){
+          dropdownValue=list.first;
+        });
       print(list);
       });
     }).catchError((error){
@@ -90,7 +94,7 @@ class TapToAddPageState extends State<TapToAddPage> {
           children: <Widget>[
 
             DropdownButton<String>(
-              value: list.first,
+              value: dropdownValue,
               icon: const Icon(Icons.arrow_downward),
               elevation: 16,
               style: const TextStyle(color: Colors.deepPurple),
@@ -249,7 +253,7 @@ class TapToAddPageState extends State<TapToAddPage> {
     builder: (BuildContext dialogContext) {
     var jsonData = json.decode(resp.body);
     var message = jsonData['message'];
-    return MyAlertDialogSHOW(
+    return MyAlertDialogSHOWWW(
     title: 'Backend Response', content: message.toString());
     });
 
@@ -263,12 +267,12 @@ class TapToAddPageState extends State<TapToAddPage> {
 
   }
 }
-class MyAlertDialogSHOW extends StatelessWidget {
+class MyAlertDialogSHOWW extends StatelessWidget {
   final String title;
   final String content;
   final List<Widget> actions;
 
-  MyAlertDialogSHOW({
+  MyAlertDialogSHOWW({
     required this.title,
     required this.content,
     this.actions = const [],
@@ -306,7 +310,7 @@ class Event {
   String? description;
   Category? category;
   String? point;
-String? date_expiration;
+  String? date_expiration;
   String? name;
 
   //il faut user
