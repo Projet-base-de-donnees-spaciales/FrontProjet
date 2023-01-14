@@ -7,6 +7,7 @@ import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'package:http/http.dart' as http;
 import '../widgets/drawer.dart';
 import 'CRudCategory.dart';
+import 'Param.dart';
 
 class CrudEvent extends StatefulWidget {
   static const String route = 'CrudEvent';
@@ -123,8 +124,8 @@ class _CrudEventState extends State<CrudEvent> {
 
   }
   void getCate()  {
-    String url="http://192.168.2.103:8080/Evenement/getAll";
-    http.get(Uri.parse(url))
+
+    http.get(Uri.parse(Param.UrlAllEvent))
         .then((resp){
 
       setState((){

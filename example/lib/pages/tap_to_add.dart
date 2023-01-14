@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_example/pages/Param.dart';
 import 'package:flutter_map_example/widgets/drawer.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
@@ -45,8 +46,7 @@ class TapToAddPageState extends State<TapToAddPage> {
   }
 
   void getCate(){
-    String url="http://192.168.2.103:8080/Category/getAll";
-    http.get(Uri.parse(url))
+    http.get(Uri.parse(Param.UrlAllCat))
         .then((resp){
 
       setState((){
@@ -239,8 +239,8 @@ class TapToAddPageState extends State<TapToAddPage> {
         ,point: "POINT("+this.tappedPoints.latitude.toString()+" "+this.tappedPoints.longitude.toString()+")"
         ,date_expiration: dateController.text,name: nameEvent.text);
 
-    var Url = "http://192.168.2.103:8080/Evenement/Add";
-    http.post(Uri.parse(Url),headers: <String, String>{"Content-Type": "application/json"},
+
+    http.post(Uri.parse(Param.UrlAddEvent),headers: <String, String>{"Content-Type": "application/json"},
     body: jsonEncode(event))
         .then((resp){
     showDialog(
