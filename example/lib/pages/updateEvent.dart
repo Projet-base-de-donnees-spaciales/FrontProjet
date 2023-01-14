@@ -2,12 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:location/location.dart';
+import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
 
 import 'CRudCategory.dart';
 import 'Param.dart';
@@ -22,7 +25,6 @@ class updateEvent extends StatefulWidget {
 
   updateEvent(this.event);
 }
-
 class _UpdateEventState extends State<updateEvent> {
   late List<dynamic> categories;
   dynamic event;
@@ -32,7 +34,8 @@ class _UpdateEventState extends State<updateEvent> {
   TextEditingController lastController = TextEditingController();
   TextEditingController nameEvent = TextEditingController();
   TextEditingController dateController = TextEditingController();
-  late LatLng CenterMap;
+  LatLng tappedPoints = LatLng(0, 0);
+  LatLng CenterMap = LatLng(31.7917, -7.0926);
   bool _isEnabled = false;
   List<dynamic> employees=[];
 
@@ -41,7 +44,7 @@ class _UpdateEventState extends State<updateEvent> {
     lastController = TextEditingController(text: this.event['evenementDTO']['description'].toString());
     dateController = TextEditingController(text: this.event['evenementDTO']['date_expiration'].toString());
     dropdownValue=this.event['evenementDTO']['categoryDTO']['name'].toString();
-     CenterMap=LatLng(double.parse(this.event['pointX'].toString()),double.parse(this.event['pointY'].toString())) ;
+     tappedPoints=LatLng(double.parse(this.event['pointX'].toString()),double.parse(this.event['pointY'].toString())) ;
 
 
   }
@@ -50,7 +53,37 @@ class _UpdateEventState extends State<updateEvent> {
     getCate();
     super.initState();
   }
+  int _selected = 0;
 
+  void on(int? value) {
+    setState((){
+      _selected = value!;
+    });
+
+    print('Value = $value');
+  }
+  List<Widget> makeRadios() {
+    List<Widget> list = <Widget>[];
+
+      list.add(RadioListTile(
+        value: 0,
+        title: Text('Focus'),
+        groupValue: _selected,
+        onChanged: (int? value){on(value);},
+        activeColor: Colors.red,
+        subtitle: Text('Ajouter votre position manullement'),
+      ));
+      list.add(RadioListTile(
+        value: 1,
+        title: Text('Live Location'),
+        groupValue: _selected,
+        onChanged: (int? value){on(value);},
+        activeColor: Colors.red,
+        subtitle: Text('Ajouter votre postion actuelle'),
+      ));
+
+    return list;
+  }
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle2;
@@ -58,7 +91,7 @@ class _UpdateEventState extends State<updateEvent> {
     markers.add( Marker(
       width: 80,
       height: 80,
-      point: CenterMap,
+      point: tappedPoints,
       builder: (context) => const Icon(
         Icons.location_on,
         color: Colors.green,
@@ -72,11 +105,13 @@ class _UpdateEventState extends State<updateEvent> {
         ),
         home: Scaffold(
             appBar: AppBar(
-              title: const Text('Update Event'),
+              title: const Center( child: Text('Modifier événement')),
             ),
             body:
             Column(
             children: <Widget>[
+              const ListTile(
+                  title:  Center(child:  Text("Catégorie"))),
 
     DropdownButton<String>(
     value: dropdownValue,
@@ -114,8 +149,8 @@ class _UpdateEventState extends State<updateEvent> {
                               }
                             },*/
     decoration: InputDecoration(
-    labelText: 'Event name',
-    hintText: 'Enter Name of the Event',
+    labelText: 'Nom',
+    hintText: "Saisir le nom d'événement",
     labelStyle: textStyle,
     border: OutlineInputBorder(
     borderRadius: BorderRadius.circular(5.0))),
@@ -134,7 +169,7 @@ class _UpdateEventState extends State<updateEvent> {
                             },*/
     decoration: InputDecoration(
     labelText: 'Description',
-    hintText: 'Enter Description of the Event',
+    hintText: "Saisir la description d'événement",
     labelStyle: textStyle,
     border: OutlineInputBorder(
     borderRadius: BorderRadius.circular(5.0))),
@@ -145,7 +180,7 @@ class _UpdateEventState extends State<updateEvent> {
     decoration: const InputDecoration(
 
     icon: Icon(Icons.calendar_today), //icon of text field
-    labelText: "Enter Date" //label text of field
+    labelText: "La date d'expiration" //label text of field
     ),
     readOnly: true,  // when true user cannot edit text
     onTap: () async {
@@ -174,12 +209,13 @@ class _UpdateEventState extends State<updateEvent> {
     )
 
 
-    ,
-              Flexible(
+  ,
+    Flexible(
                 child: FlutterMap(
                   options: MapOptions(
                     center: CenterMap,
                     zoom: 5,
+                      onTap: _handleTap
                   ),
                   nonRotatedChildren: [
                     AttributionWidget.defaultWidget(
@@ -197,8 +233,10 @@ class _UpdateEventState extends State<updateEvent> {
                   ],
                 ),
               )
+
+
    , ElevatedButton(
-    child: Text('ADD'),
+    child: Text('Ajouter'),
     onPressed: ()  {
     Updateevent(context);
 
@@ -245,7 +283,12 @@ class _UpdateEventState extends State<updateEvent> {
       print(error);
     });
   }
-
+  void _handleTap(TapPosition tapPosition, LatLng latlng) {
+    setState(() {
+      tappedPoints=latlng;
+      CenterMap=latlng;
+    });
+  }
   void Updateevent(BuildContext context)  {
     Category emp = new Category( name: dropdownValue);
     Event event=new Event(description: lastController.text,category: emp

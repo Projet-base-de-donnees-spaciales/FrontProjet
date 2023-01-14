@@ -63,24 +63,24 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
       children: <Widget>[
         const DrawerHeader(
           child: Center(
-            child: Text('MOVE AND DISCOVER'),
+            child: Text('Options',style: TextStyle(color: Colors.blue,fontSize: 25.0)),
           ),
         ),
         _buildMenuItem(
           context,
-          const Text('Map whit locations'),
+          const Text("Page d'cceuil",style: TextStyle(fontSize: 25.0)),
           HomePage.route,
           currentRoute,
         ),
         _buildMenuItem(
           context,
-          const Text('Category'),
+          const Text('Categories',style: TextStyle(fontSize: 25.0)),
           CrudCategory.route,
           currentRoute,
         ),
         _buildMenuItem(
           context,
-          const Text('Event'),
+          const Text('Evénemets',style: TextStyle(fontSize: 25.0)),
           CrudEvent.route,
           currentRoute,
         ),
@@ -102,13 +102,13 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           CustomCrsPage.route,
           currentRoute,
         ),*/
-        _buildMenuItem(
+        /* _buildMenuItem(
           context,
           const Text('Add Pins'),
           TapToAddPage.route,
           currentRoute,
         ),
-        /*
+
         _buildMenuItem(
           context,
           const Text('Esri'),
@@ -205,12 +205,12 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           WidgetsPage.route,
           currentRoute,
         ),*/
-        _buildMenuItem(
+        /*_buildMenuItem(
           context,
           const Text('Live Location '),
           LiveLocationPage.route,
           currentRoute,
-        ),/*
+        ),*//*
         _buildMenuItem(
           context,
           const Text('Tile loading error handle'),

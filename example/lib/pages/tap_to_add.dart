@@ -87,12 +87,13 @@ class TapToAddPageState extends State<TapToAddPage> {
     ));
 
     return Scaffold(
-        appBar: AppBar(title: const Text('ADD Event')),
+        appBar: AppBar(title: const Center( child: Text('Ajouter événements'))),
         drawer: buildDrawer(context, CrudCategory.route),
     body:
       Column(
           children: <Widget>[
-
+            const ListTile(
+                title:  Center(child:  Text("Catégorie"))),
             DropdownButton<String>(
               value: dropdownValue,
               icon: const Icon(Icons.arrow_downward),
@@ -129,8 +130,8 @@ class TapToAddPageState extends State<TapToAddPage> {
                               }
                             },*/
                   decoration: InputDecoration(
-                      labelText: 'Event name',
-                      hintText: 'Enter Name of the Event',
+                      labelText: 'Nom ',
+                      hintText: 'Saisir le nom d événement',
                       labelStyle: textStyle,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0))),
@@ -149,7 +150,7 @@ class TapToAddPageState extends State<TapToAddPage> {
                             },*/
                       decoration: InputDecoration(
                           labelText: 'Description',
-                          hintText: 'Enter Description of the Event',
+                          hintText: 'Saisir la description',
                           labelStyle: textStyle,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0))),
@@ -160,7 +161,7 @@ class TapToAddPageState extends State<TapToAddPage> {
               decoration: const InputDecoration(
 
                   icon: Icon(Icons.calendar_today), //icon of text field
-                  labelText: "Enter Date" //label text of field
+                  labelText: "Date d'expiration" //label text of field
               ),
               readOnly: true,  // when true user cannot edit text
               onTap: () async {
@@ -206,7 +207,7 @@ class TapToAddPageState extends State<TapToAddPage> {
               ),
             ),
             ElevatedButton(
-                child: Text('ADD'),
+                child: Text('Ajouter'),
                 onPressed: ()  {
                 ADDevent();
 

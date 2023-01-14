@@ -32,39 +32,64 @@ class _CrudEventState extends State<CrudEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Fetch Events')),
+        appBar: AppBar(title: const Center(child: Text('Event.com'))),
         drawer: buildDrawer(context, CrudEvent.route),
         body:
-        Column(
+        Center(
+        child: Column(
             children: <Widget>[
-              ElevatedButton(
-                  child: Text('ADD New Event'),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TapToAddPage()));
-                  }),
+              const ListTile(
+                title:  Center(child:  Text("Gestion des événements \n",
+                  style:  TextStyle(
+                      fontSize: 45 , color: Colors.black),
+                )),
+              ),
+              SizedBox(
+                  width: 250, // <-- Your width
+                  height: 50, // <-- Your height
+                  child:  ElevatedButton.icon(
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
+                    label: const Text('Ajouter événémént'),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TapToAddPage()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green,
+                      //onPrimary: Colors.black,
+                    ),
+                  )
 
-
+              ),
+              const ListTile(
+                title:  Center(child:  Text("\n")),
+              ),
               DataTable(
                 onSelectAll: (b) {},
                 sortColumnIndex: 0,
                 sortAscending: true,
+                headingRowColor:
+                MaterialStateColor.resolveWith((states) => Colors.blue),
                 columns: <DataColumn>[
-                  DataColumn(label: Text("Name"), tooltip: "To Display name"),
+                  DataColumn(label: Text("Name"), tooltip: "Nom"),
                   DataColumn(label: Text("Description"),
-                      tooltip: "To Display description"),
+                      tooltip: "description"),
                   DataColumn(label: Text("Date de creation"),
-                      tooltip: "To Display description"),
+                      tooltip: "Date de creation"),
                   DataColumn(label: Text("Date de Expiration"),
-                      tooltip: "To Display description"),
-                  DataColumn(label: Text("Category"),
-                      tooltip: "To Display description"),
+                      tooltip: "Date de Expiration"),
+                  DataColumn(label: Text("Categorie"),
+                      tooltip: "Categorie"),
                   DataColumn(label: Text("Position"),
-                      tooltip: "To Display description"),
-                  DataColumn(label: Text("Update"), tooltip: "Update data"),
-                  DataColumn(label: Text("Delete"), tooltip: "Delete data"),
+                      tooltip: "Position"),
+                  DataColumn(label: Text("Modifier"), tooltip: "Modifier"),
+                  DataColumn(label: Text("Supprimer"), tooltip: "Supprimer"),
                 ],
                 rows: this.eventes // accessing list from Getx controller
                     .map(
@@ -104,7 +129,7 @@ class _CrudEventState extends State<CrudEvent> {
                               },
                               icon: Icon(
                                 Icons.edit,
-                                color: Colors.black,
+                                color: Colors.blue,
                               ),
                             ),
                           ),
@@ -116,8 +141,8 @@ class _CrudEventState extends State<CrudEvent> {
                                     barrierDismissible: true,
                                     builder: (BuildContext dialogContext) {
                                       return MyAlertDialogg(
-                                          title: 'Delete Alert',
-                                          content: "Are you sure you want to delete this event",
+                                          title: "Suppresion d'événement",
+                                          content: "Vous voulez vraiment supprimer cet événement",
                                           cate: int.parse(
                                               user['evenementDTO']['id'].toString()),
                                           context: context);
@@ -125,7 +150,7 @@ class _CrudEventState extends State<CrudEvent> {
                               },
                               icon: Icon(
                                 Icons.delete,
-                                color: Colors.black,
+                                color: Colors.red,
                               ),
                             ),
                           )
@@ -135,7 +160,7 @@ class _CrudEventState extends State<CrudEvent> {
                     .toList(),
               )
             ]
-        ));
+        )));
   }
   void getCate() {
 
