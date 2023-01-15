@@ -7,6 +7,7 @@ import 'package:flutter_map_example/pages/updateCategory.dart';
 import 'package:http/http.dart' as http;
 
 class Param {
+
  static String UrlAddCat = "http://192.168.2.103:8080/Category/Add";
  static String UrlAllCat = "http://192.168.2.103:8080/Category/getAll";
  static String UrlDeleteCat = "http://192.168.2.103:8080/Category/Delete/";
@@ -20,4 +21,5 @@ class Param {
  static String urlUsers="http://192.168.2.103:8080/users";
  static String urlADDUser= "http://192.168.2.103:8080/users/Add";
  static String urlGetRoles="http://192.168.2.103:8080/roles";
+
 }

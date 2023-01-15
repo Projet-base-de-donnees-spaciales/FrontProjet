@@ -41,7 +41,7 @@ class _CreateurState extends State<CreateurEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Fetch Events'),
+       appBar: AppBar(title: const Center(child: Text('Events.com')),
             leading: GestureDetector(
               onTap: () { /* Write listener code here */ },
               child: Icon(
@@ -50,7 +50,7 @@ class _CreateurState extends State<CreateurEvent> {
             ),
             actions: <Widget>[
               Padding(
-                  padding: EdgeInsets.only(right: 20.0),
+                  padding: EdgeInsets.only(right: 40.0,top: 11),
                   child: GestureDetector(
                     onTap: () { Navigator.push(
                         context,

@@ -56,36 +56,49 @@ class _CrudCategoryState extends State<CrudCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-        appBar: AppBar(title: const Text('Fetch Categories'),
+        appBar: AppBar(title: const Center(child: Text('Events.com')),
             actions: <Widget>[
               Padding(
-                  padding: EdgeInsets.only(right: 20.0),
+                  padding: EdgeInsets.only(right: 45.0,top: 10),
                   child: GestureDetector(
                     onTap: () { Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CrudEvent()));},
-                    child: Text("evenement"),
+                    child: const Text("Evénement",style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.white,
+                      decorationColor: Colors.redAccent,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                    )),
                   )
               ),
               Padding(
-                  padding: EdgeInsets.only(right: 20.0),
+                  padding: EdgeInsets.only(right: 20.0,top: 11),
                   child: GestureDetector(
                     onTap: () { Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => Users()));},
-                    child: Text("Users"),
+
+                    child: const Text("Users",style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.white,
+                      decorationColor: Colors.redAccent,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                    )),
                   )
               )
               ,Padding(
-                  padding: EdgeInsets.only(right: 20.0),
+                  padding: EdgeInsets.only(right: 20.0,top: 11),
                   child: GestureDetector(
                     onTap: () { Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => LoginScreen()));},
-                    child: Icon(
+                    child: const Icon(
                       Icons.logout,
                       size: 26.0,
                     ),
