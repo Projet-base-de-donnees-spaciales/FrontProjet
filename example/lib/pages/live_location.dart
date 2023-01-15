@@ -17,7 +17,7 @@ class LiveLocationPage extends StatefulWidget {
 class _LiveLocationPageState extends State<LiveLocationPage> {
   LocationData? _currentLocation;
   late final MapController _mapController;
-
+  LatLng CenterMap = LatLng(31.7917, -7.0926);
   bool _liveUpdate = false;
   bool _permission = false;
 
@@ -66,6 +66,7 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
                       LatLng(_currentLocation!.latitude!,
                           _currentLocation!.longitude!),
                       _mapController.zoom);
+                  CenterMap= LatLng(_currentLocation!.latitude!, _currentLocation!.longitude!);
                 }
               });
             }
@@ -98,6 +99,7 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
     if (_currentLocation != null) {
       currentLatLng =
           LatLng(_currentLocation!.latitude!, _currentLocation!.longitude!);
+
     } else {
       currentLatLng = LatLng(0, 0);
     }
@@ -107,42 +109,33 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
         width: 80,
         height: 80,
         point: currentLatLng,
-        builder: (ctx) => const FlutterLogo(
-          textColor: Colors.blue,
-          key: ObjectKey(Colors.blue),
+        builder: (context) => const Icon(
+          Icons.location_on,
+          color: Colors.blue,
+          size: 40,
         ),
       ),
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      drawer: buildDrawer(context, LiveLocationPage.route),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
-              child: _serviceError!.isEmpty
-                  ? Text('This is a map that is showing '
-                      '(${currentLatLng.latitude}, ${currentLatLng.longitude}).')
-                  : Text(
-                      'Error occured while acquiring location. Error Message : '
-                      '$_serviceError'),
-            ),
+
             Flexible(
               child: FlutterMap(
                 mapController: _mapController,
                 options: MapOptions(
                   center:
-                      LatLng(currentLatLng.latitude, currentLatLng.longitude),
+                  CenterMap,
                   zoom: 5,
                   interactiveFlags: interActiveFlags,
                 ),
                 children: [
                   TileLayer(
                     urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                     userAgentPackageName: 'dev.fleaflet.flutter_map.example',
                   ),
                   MarkerLayer(markers: markers),
@@ -152,31 +145,6 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
           ],
         ),
       ),
-      floatingActionButton: Builder(builder: (BuildContext context) {
-        return FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              _liveUpdate = !_liveUpdate;
-
-              if (_liveUpdate) {
-                interActiveFlags = InteractiveFlag.rotate |
-                    InteractiveFlag.pinchZoom |
-                    InteractiveFlag.doubleTapZoom;
-
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text(
-                      'In live update mode only zoom and rotation are enable'),
-                ));
-              } else {
-                interActiveFlags = InteractiveFlag.all;
-              }
-            });
-          },
-          child: _liveUpdate
-              ? const Icon(Icons.location_on)
-              : const Icon(Icons.location_off),
-        );
-      }),
     );
   }
 }

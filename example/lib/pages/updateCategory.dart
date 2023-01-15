@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/CRudCategory.dart';
 import 'package:http/http.dart' as http;
 
+import 'Param.dart';
+
 class updateCategory extends StatefulWidget {
   dynamic category;
   static const String route = 'updateCategory';
@@ -47,9 +49,10 @@ class _UpdateCategoryState extends State<updateCategory> {
         ),
         home: Scaffold(
         appBar: AppBar(
-        title: const Text('Update Category'),
+        title: const Center( child: Text('Modier catégorie')),
            ),
-            body: Container(
+            body:
+            Container(
                 child: Padding(
                     padding: EdgeInsets.all(minimumPadding * 2),
                     child: ListView(children: <Widget>[
@@ -62,8 +65,8 @@ class _UpdateCategoryState extends State<updateCategory> {
                             controller: firstController,
 
                             decoration: InputDecoration(
-                                labelText: 'First Name',
-                                hintText: 'Enter Your First Name',
+                                labelText: 'Nom',
+                                hintText: 'Saisir le nom',
                                 labelStyle: textStyle,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0))),
@@ -80,14 +83,14 @@ class _UpdateCategoryState extends State<updateCategory> {
                               }
                             },*/
                             decoration: InputDecoration(
-                                labelText: 'Last Name',
-                                hintText: 'Enter Your First Name',
+                                labelText: 'Description',
+                                hintText: 'Saisir decription',
                                 labelStyle: textStyle,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0))),
                           )),
                       ElevatedButton(
-                          child: Text('Update Details'),
+                          child: Text('Modifier catégorie'),
                           onPressed: ()  {
 
                             Category emp = new Category(id: int.parse(category['id'].toString()), name: firstController.text, description:lastController.text);
@@ -108,8 +111,7 @@ class _UpdateCategoryState extends State<updateCategory> {
   void updateEmployees(
       Category employee, BuildContext context)  {
 
-    var Url = "http://192.168.2.103:8080/Category/Update";
-    http.put(Uri.parse(Url),headers: <String, String>{"Content-Type": "application/json"},
+    http.put(Uri.parse(Param.UrlUpdateCat),headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(employee))
         .then((resp){
       showDialog(
@@ -118,7 +120,7 @@ class _UpdateCategoryState extends State<updateCategory> {
           builder: (BuildContext dialogContext) {
             var jsonData = json.decode(resp.body);
             var message = jsonData['message'];
-            return MyAlertDialog(
+            return MyAlertDialogSHOW(
                 title: 'Backend Response', content: message.toString());
           });
 
@@ -134,41 +136,5 @@ class _UpdateCategoryState extends State<updateCategory> {
 
 }
 
-class MyAlertDialog extends StatelessWidget {
-  final String title;
-  final String content;
-  final List<Widget> actions;
 
-  MyAlertDialog({
-    required this.title,
-    required this.content,
-    this.actions = const [],
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(
-        this.title,
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
-      actions: <Widget>[
-        ElevatedButton(
-            child: Text('OK'),
-            onPressed: ()  {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CrudCategory()));
-            })
-
-        ],
-      content: Text(
-        "Update successfully",
-        style: Theme.of(context).textTheme.bodyLarge,
-      ),
-
-    );
-  }
-}
 
