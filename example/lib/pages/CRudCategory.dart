@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/ADDCategory.dart';
 import 'package:flutter_map_example/pages/CrudEvent.dart';
 import 'package:flutter_map_example/pages/updateCategory.dart';
+import 'package:flutter_map_example/pages/users/Users.dart';
 import 'package:http/http.dart' as http;
 
 import '../widgets/drawer.dart';
@@ -73,7 +74,7 @@ class _CrudCategoryState extends State<CrudCategory> {
                     onTap: () { Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CrudEvent()));},
+                            builder: (context) => Users()));},
                     child: Text("Users"),
                   )
               )

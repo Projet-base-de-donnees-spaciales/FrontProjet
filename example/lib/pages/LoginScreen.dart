@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/CRudCategory.dart';
+import 'package:flutter_map_example/pages/users/model/User.dart';
 import 'package:flutter_map_example/pages/widgets/email_field.dart';
 import 'package:flutter_map_example/pages/widgets/get_started_button.dart';
 import 'package:flutter_map_example/pages/widgets/password_field.dart';
@@ -83,12 +84,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
  void goRedirection(   TextEditingController emailController, TextEditingController passwordController){
-    User user=new User(email: emailController.text,password:passwordController.text);
+    User user=User(email: emailController.text,password:passwordController.text);
     http.post(Uri.parse(Param.UrlLogin),headers: <String, String>{"Content-Type": "application/json"},
         body: jsonEncode(user))
         .then((resp){
             var jsonData = json.decode(resp.body);
-            var role = jsonData['user']['role'];
+            var role = jsonData['user']['role']['id'];
 
             if(role.toString()=="1"){
               print("I am admin");
@@ -119,27 +120,4 @@ class _LoginScreenState extends State<LoginScreen> {
 
   }
 }
-class User {
 
-  int? id;
-  String? username;
-  String? email;
-  String? password;
-  int? role;
-
-  //il faut user
-
-
-  User({this.id,this.username, this.email, this.password,this.role});
-
-  Map<String, dynamic> toJson() => {
-    "id":id,
-    "username": username,
-    "email": email,
-    'password': password,
-    'role':role
-  };
-  factory User.fromJson( dynamic json) => User(id:int.parse(json['id'].toString()),
-      username: json['username'].toString(),email: json["email"].toString(), password: json["password"].toString(),
-      role:int.parse(json['role'].toString()));
-}

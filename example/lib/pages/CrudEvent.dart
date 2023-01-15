@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'package:flutter_map_example/pages/updateEvent.dart';
+import 'package:flutter_map_example/pages/users/Users.dart';
 import 'package:http/http.dart' as http;
 import '../widgets/drawer.dart';
 import 'CRudCategory.dart';
@@ -53,7 +54,7 @@ class _CrudEventState extends State<CrudEvent> {
                         context,
                         MaterialPageRoute(
                           //Page
-                            builder: (context) => CrudCategory()));},
+                            builder: (context) => Users()));},
                     child: Text("Users"),
                   )
               )

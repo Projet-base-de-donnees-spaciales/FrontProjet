@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map_example/pages/CrudEvent.dart';
+import '../pages/CrudEvent.dart';
 
 import 'package:flutter_map_example/pages/animated_map_controller.dart';
 import 'package:flutter_map_example/pages/circle.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_map_example/pages/epsg4326_crs.dart';
 import 'package:flutter_map_example/pages/esri.dart';
 import 'package:flutter_map_example/pages/fallback_url_network_page.dart';
 import 'package:flutter_map_example/pages/fallback_url_offline_page.dart';
-import 'package:flutter_map_example/pages/home.dart';
+import '../pages/home.dart';
 import 'package:flutter_map_example/pages/interactive_test_page.dart';
 import 'package:flutter_map_example/pages/latlng_to_screen_point.dart';
 import 'package:flutter_map_example/pages/live_location.dart';
@@ -39,6 +39,7 @@ import 'package:flutter_map_example/pages/widgets.dart';
 import 'package:flutter_map_example/pages/wms_tile_layer.dart';
 
 import '../pages/CRudCategory.dart';
+import '../pages/users/Users.dart';
 
 Widget _buildMenuItem(
     BuildContext context, Widget title, String routeName, String currentRoute) {
@@ -82,6 +83,12 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
           context,
           const Text('Evénemets',style: TextStyle(fontSize: 25.0)),
           CrudEvent.route,
+          currentRoute,
+        ),
+        _buildMenuItem(
+          context,
+          const Text('Utilisateurs',style: TextStyle(fontSize: 25.0)),
+          Users.route,
           currentRoute,
         ),
         /* _buildMenuItem(

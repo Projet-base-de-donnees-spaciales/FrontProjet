@@ -6,6 +6,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_example/pages/LoginScreen.dart';
 
 import 'package:flutter_map_example/pages/tap_to_add.dart';
+import 'package:flutter_map_example/pages/users/model/User.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
