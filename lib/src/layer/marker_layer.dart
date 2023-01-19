@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/src/core/bounds.dart';
@@ -110,12 +111,15 @@ class Marker {
   /// [Directionality.of] returns [TextDirection.rtl].
   final AlignmentGeometry? rotateAlignment;
 
+  String name;
+
   Marker({
+    this.name = "event",
     required this.point,
-    required this.builder,
+     required this.builder,
     this.key,
-    this.width = 30.0,
-    this.height = 30.0,
+    this.width = 10.0,
+    this.height = 10.0,
     this.rotate,
     this.rotateOrigin,
     this.rotateAlignment,

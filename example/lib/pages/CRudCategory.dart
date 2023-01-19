@@ -57,41 +57,41 @@ class _CrudCategoryState extends State<CrudCategory> {
     return Scaffold(
 
         appBar: AppBar(title: const Center(child: Text('Events.com')),
-            actions: <Widget>[
+             actions: <Widget>[
+            //   Padding(
+            //       padding: EdgeInsets.only(right: 45.0,top: 10),
+            //       child: GestureDetector(
+            //         onTap: () { Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => CrudEvent()));},
+            //         child: const Text("Evénement",style: TextStyle(
+            //           fontSize: 16.0,
+            //           color: Colors.white,
+            //           decorationColor: Colors.redAccent,
+            //           fontStyle: FontStyle.italic,
+            //           fontWeight: FontWeight.bold,
+            //         )),
+            //       )
+            //   ),
+            //   Padding(
+            //       padding: EdgeInsets.only(right: 20.0,top: 11),
+            //       child: GestureDetector(
+            //         onTap: () { Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => Users()));},
+            //
+            //         child: const Text("Users",style: TextStyle(
+            //           fontSize: 16.0,
+            //           color: Colors.white,
+            //           decorationColor: Colors.redAccent,
+            //           fontStyle: FontStyle.italic,
+            //           fontWeight: FontWeight.bold,
+            //         )),
+            //       )
+            //   )
               Padding(
-                  padding: EdgeInsets.only(right: 45.0,top: 10),
-                  child: GestureDetector(
-                    onTap: () { Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CrudEvent()));},
-                    child: const Text("Evénement",style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.white,
-                      decorationColor: Colors.redAccent,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold,
-                    )),
-                  )
-              ),
-              Padding(
-                  padding: EdgeInsets.only(right: 20.0,top: 11),
-                  child: GestureDetector(
-                    onTap: () { Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Users()));},
-
-                    child: const Text("Users",style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.white,
-                      decorationColor: Colors.redAccent,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold,
-                    )),
-                  )
-              )
-              ,Padding(
                   padding: EdgeInsets.only(right: 20.0,top: 11),
                   child: GestureDetector(
                     onTap: () { Navigator.push(
@@ -103,7 +103,8 @@ class _CrudCategoryState extends State<CrudCategory> {
                       size: 26.0,
                     ),
                   )
-              )]
+              )
+             ]
         ),
       drawer: buildDrawer(context, CrudCategory.route),
 body:

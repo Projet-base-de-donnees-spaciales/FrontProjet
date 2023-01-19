@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map_example/pages/final_users/live_locationEvents.dart';
+import 'package:flutter_map_example/pages/final_users/marker_events.dart';
+import 'package:flutter_map_example/pages/styles/colors.dart';
 import '../pages/CrudEvent.dart';
 
 import 'package:flutter_map_example/pages/animated_map_controller.dart';
@@ -63,41 +66,58 @@ Drawer buildDrawer(BuildContext context, String currentRoute) {
     child: ListView(
       children: <Widget>[
         const DrawerHeader(
-          child: Center(
-            child: Text('Options',style: TextStyle(color: Colors.blue,fontSize: 25.0)),
-          ),
+            margin: EdgeInsets.zero,
+            padding: EdgeInsets.zero,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image:  AssetImage('../assets/images/eve.gif'))
+            ),
+            child: Text("Flutter Step-by-Step",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500))
         ),
+
         _buildMenuItem(
           context,
-          const Text("Page d'cceuil",style: TextStyle(fontSize: 25.0)),
+          const Text("Page d'cceuil",style: TextStyle(fontSize: 15.0)),
           HomePage.route,
           currentRoute,
         ),
         _buildMenuItem(
           context,
-          const Text('Categories',style: TextStyle(fontSize: 25.0)),
+          const Text('Categories',style: TextStyle(fontSize: 15.0)),
           CrudCategory.route,
           currentRoute,
         ),
         _buildMenuItem(
           context,
-          const Text('Evénemets',style: TextStyle(fontSize: 25.0)),
+          const Text('Evénemets',style: TextStyle(fontSize: 15.0)),
           CrudEvent.route,
           currentRoute,
         ),
         _buildMenuItem(
           context,
-          const Text('Utilisateurs',style: TextStyle(fontSize: 25.0)),
+          const Text('Utilisateurs',style: TextStyle(fontSize: 15.0)),
           Users.route,
           currentRoute,
         ),
-        /* _buildMenuItem(
+
+        _buildMenuItem(
           context,
-          const Text('NetworkTileProvider'),
-          NetworkTileProviderPage.route,
+          const Text('Events on map',style: TextStyle(fontSize: 15.0)),
+          MarkerEventPage.route,
           currentRoute,
         ),
-        _buildMenuItem(
+         _buildMenuItem(
+          context,
+          const Text('Live location',style: TextStyle(fontSize: 15.0)),
+          LiveLocation1Page.route,
+          currentRoute,
+        ),
+        /*_buildMenuItem(
           context,
           const Text('WMS Layer'),
           WMSLayerPage.route,

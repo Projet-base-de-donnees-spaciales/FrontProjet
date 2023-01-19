@@ -85,13 +85,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return  Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(title: const Center(child: Text('Events.com'))),
         body: const MyCardWidget(),
-      ),
+      //),
     );
   }
 }

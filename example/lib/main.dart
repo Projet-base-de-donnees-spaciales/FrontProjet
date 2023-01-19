@@ -12,6 +12,8 @@ import 'package:flutter_map_example/pages/epsg4326_crs.dart';
 import 'package:flutter_map_example/pages/esri.dart';
 import 'package:flutter_map_example/pages/fallback_url_network_page.dart';
 import 'package:flutter_map_example/pages/fallback_url_offline_page.dart';
+import 'package:flutter_map_example/pages/final_users/live_locationEvents.dart';
+import 'package:flutter_map_example/pages/final_users/marker_events.dart';
 import 'package:flutter_map_example/pages/home.dart';
 import 'package:flutter_map_example/pages/interactive_test_page.dart';
 import 'package:flutter_map_example/pages/latlng_to_screen_point.dart';
@@ -39,6 +41,7 @@ import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'package:flutter_map_example/pages/tile_builder_example.dart';
 import 'package:flutter_map_example/pages/tile_loading_error_handle.dart';
 import 'package:flutter_map_example/pages/updateCategory.dart';
+import 'package:flutter_map_example/pages/users/Users.dart';
 import 'package:flutter_map_example/pages/widgets.dart';
 import 'package:flutter_map_example/pages/wms_tile_layer.dart';
 
@@ -57,7 +60,10 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomePage(),
       routes: <String, WidgetBuilder>{
+        LiveLocation1Page.route:(context)=>LiveLocation1Page(),
+        MarkerEventPage.route:(context)=> MarkerEventPage(),
         NetworkTileProviderPage.route: (context) => const NetworkTileProviderPage(),
+        Users.route:(context)=>const Users(),
         CrudCategory.route:(context)=>const CrudCategory(),
         CrudEvent.route:(context)=>const CrudEvent(),
         WidgetsPage.route: (context) => const WidgetsPage(),

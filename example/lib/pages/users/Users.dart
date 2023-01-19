@@ -9,6 +9,7 @@ import 'package:flutter_map_example/widgets/drawer.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../CRudCategory.dart';
+import '../LoginScreen.dart';
 
 
 bool _isLoading = false;
@@ -46,31 +47,70 @@ class _UsersState extends State<Users> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Users'),),
+      appBar: AppBar(title: const Text('Users'),
+          actions: <Widget>[
+            Padding(
+                padding: const EdgeInsets.only(right: 40.0,top: 11),
+                child: GestureDetector(
+                  onTap: () { Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LoginScreen()));},
+                  child: const Icon(
+                    Icons.logout_rounded,
+                    size: 26.0,
+                  ),
+                )
+            )]
+        ),
       drawer: buildDrawer(context, Users.route),
-      body: Column(
+      body:
+      Center(
+      child: Column(
     children:<Widget> [
       if(!_isLoading)...[
         spinkit2
     ]else...[
-        ElevatedButton(
-          child: Text('Add User'),
-          onPressed: (){
-            Navigator.push(
-              context,MaterialPageRoute(builder: (context)=> AddUser())
-          );
-          },
+        const ListTile(
+          title:  Center(child:  Text("Gestion des utilisateurs \n",
+            style:  TextStyle(
+                fontSize: 45 , color: Colors.black),
+          )),
+        ),
+        SizedBox(
+        width: 250, // <-- Your width
+        height: 50, // <-- Your height
+        child:  ElevatedButton.icon(
+        icon: const Icon(
+        Icons.add,
+        color: Colors.white,
+        size: 30.0,
+        ),
+        label: const Text('Ajouter utilisateur'),
+        onPressed: () { Navigator.push(
+
+            context,MaterialPageRoute(
+            builder: (context)=> AddUser())); },
+          style: ElevatedButton.styleFrom(
+            primary: Colors.green,
+            //onPrimary: Colors.black,
+          ),
+        ))
+        , const ListTile(
+          title:  Center(child:  Text("\n")),
         ),
         DataTable(
           onSelectAll: (b) {},
           sortColumnIndex: 0,
           sortAscending: true,
+          headingRowColor:
+          MaterialStateColor.resolveWith((states) => Colors.blue),
           columns: <DataColumn>[
-            DataColumn(label: Text("UserName"),tooltip: "Username"),
-            DataColumn(label: Text("Email"),tooltip: "Email"),
-            DataColumn(label: Text("Role"),tooltip: "Role"),
-            DataColumn(label: Text("Update"),tooltip: "Update user"),
-            DataColumn(label: Text("Delete"),tooltip: "Delete user"),
+            DataColumn(label: Text("UserName", style:  TextStyle(color: Colors.white)),tooltip: "Username",),
+            DataColumn(label: Text("Email", style:  TextStyle(color: Colors.white)),tooltip: "Email"),
+            DataColumn(label: Text("Role", style:  TextStyle(color: Colors.white)),tooltip: "Role"),
+            DataColumn(label: Text("Update", style:  TextStyle(color: Colors.white)),tooltip: "Update user"),
+            DataColumn(label: Text("Delete", style:  TextStyle(color: Colors.white)),tooltip: "Delete user"),
           ],
           rows: this.users
               .map(
@@ -95,7 +135,7 @@ class _UsersState extends State<Users> {
                             },
                             icon: Icon(
                               Icons.edit,
-                              color: Colors.black,
+                              color: Colors.lightBlueAccent,
                             ),
                           ),
                         ),
@@ -114,7 +154,7 @@ class _UsersState extends State<Users> {
                             },
                             icon: Icon(
                               Icons.delete,
-                              color: Colors.black,
+                              color: Colors.red,
                             ),
                           ),
                         )
@@ -125,11 +165,15 @@ class _UsersState extends State<Users> {
     ]
     ,
     ]
-      ));
+      )));
   }
 
   void getUsers(){
     _isLoading = false;
+    var duration = const Duration(seconds: 5);
+    print('Start sleeping');
+    //sleep(duration);
+    print('5 seconds has passed');
     print('get users');
     http.get(Uri.parse(Param.urlUsers))
         .then((response) => {

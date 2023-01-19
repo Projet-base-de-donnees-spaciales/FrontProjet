@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/CRudCategory.dart';
+import 'package:flutter_map_example/pages/live_location.dart';
 import 'package:flutter_map_example/pages/users/model/User.dart';
 import 'package:flutter_map_example/pages/widgets/email_field.dart';
 import 'package:flutter_map_example/pages/widgets/get_started_button.dart';
@@ -108,7 +109,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ;
             }
             else{
-              print("hello");
+              print("I am a user");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => LiveLocationPage()))
+              ;
             }
 
 

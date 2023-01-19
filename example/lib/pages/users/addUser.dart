@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_example/pages/Param.dart';
+import 'package:flutter_map_example/pages/users/Users.dart';
 import 'package:flutter_map_example/pages/users/model/Role.dart';
 import 'package:flutter_map_example/pages/users/model/User.dart';
 import 'package:flutter_map_example/widgets/drawer.dart';
@@ -164,7 +165,7 @@ class _AddUserState extends State<AddUser> {
               barrierDismissible: true,
               builder: (BuildContext dialogContext) {
                 if(response.statusCode==201);
-                return MyAlertDialogSHOW(
+                return MyAlertDialogSHOWUsers(
                     title: 'Response', content: "user created !");
               })
         }).catchError((error){
@@ -172,3 +173,46 @@ class _AddUserState extends State<AddUser> {
         });
   }
 }
+
+class MyAlertDialogSHOWUsers extends StatelessWidget {
+  final String title;
+  final String content;
+  final List<Widget> actions;
+
+  //final String idUser;
+
+  MyAlertDialogSHOWUsers({
+    required this.title,
+    required this.content,
+    this.actions = const [],
+
+    //required this.idUser
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        this.title,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      actions: <Widget>[
+        ElevatedButton(
+            child: Text('OK'),
+            onPressed: ()  {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Users()));
+            })
+
+      ],
+      content: Text(
+        this.content,
+        style: Theme.of(context).textTheme.bodyLarge,
+      ),
+
+    );
+  }
+}
+
