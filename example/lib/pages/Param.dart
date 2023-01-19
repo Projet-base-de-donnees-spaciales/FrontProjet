@@ -7,19 +7,20 @@ import 'package:flutter_map_example/pages/updateCategory.dart';
 import 'package:http/http.dart' as http;
 
 class Param {
-
- static String UrlAddCat = "http://192.168.2.103:8080/Category/Add";
- static String UrlAllCat = "http://192.168.2.103:8080/Category/getAll";
- static String UrlDeleteCat = "http://192.168.2.103:8080/Category/Delete/";
- static String UrlUpdateCat ="http://192.168.2.103:8080/Category/Update";
- static String UrlAllEvent = "http://192.168.2.103:8080/Evenement/getAll";
- static String UrlAddEvent= "http://192.168.2.103:8080/Evenement/Add";
- static String UrlDeleteEvent="http://192.168.2.103:8080/Evenement/Delete/";
- static String UrlUpdateEvent= "http://192.168.2.103:8080/Evenement/Update";
- static String UrlLogin= "http://192.168.2.103:8080/users/login";
- static String UrlAllEventUser="http://192.168.2.103:8080/Evenement/User/getAll/";
- static String urlUsers="http://192.168.2.103:8080/users";
- static String urlADDUser= "http://192.168.2.103:8080/users/Add";
- static String urlGetRoles="http://192.168.2.103:8080/roles";
+ static String baseurl="http://192.168.16.178:8080";
+ static String socketUrl=baseurl+"/sgbds-endpoint";
+ static String UrlAddCat = baseurl +"/Category/Add";
+ static String UrlAllCat = baseurl+"/Category/getAll";
+ static String UrlDeleteCat = baseurl+"/Category/Delete/";
+ static String UrlUpdateCat =baseurl+"/Category/Update";
+ static String UrlAllEvent = baseurl+"/Evenement/getAll";
+ static String UrlAddEvent= baseurl+"/Evenement/Add";
+ static String UrlDeleteEvent=baseurl+"/Evenement/Delete/";
+ static String UrlUpdateEvent= baseurl+"/Evenement/Update";
+ static String UrlLogin= baseurl+"/users/login";
+ static String UrlAllEventUser=baseurl+"/Evenement/User/getAll/";
+ static String urlUsers=baseurl+"/users";
+ static String urlADDUser= baseurl+"/users/Add";
+ static String urlGetRoles=baseurl+"/roles";
 
 }
