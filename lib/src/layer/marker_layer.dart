@@ -74,7 +74,7 @@ enum AnchorAlign {
 /// Marker object that is rendered by [MarkerLayerWidget]
 class Marker {
   /// Coordinates of the marker
-  final LatLng point;
+  late final LatLng point;
 
   /// Function that builds UI of the marker
   final WidgetBuilder builder;
