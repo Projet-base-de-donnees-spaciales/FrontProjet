@@ -46,7 +46,12 @@ class _ADDCategoryState extends State<ADDCategory> {
             appBar: AppBar(
               title: const Center( child: Text('Ajouter catégorie')),
             ),
-            body:
+            body:SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child:
+    SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    child:
             Center(
             child: Padding(
                 padding: EdgeInsets.all(minimumPadding * 2),
@@ -94,7 +99,7 @@ class _ADDCategoryState extends State<ADDCategory> {
                           category = employees;
                         });
                       })
-                ])))
+                ])))))
 
         )
 

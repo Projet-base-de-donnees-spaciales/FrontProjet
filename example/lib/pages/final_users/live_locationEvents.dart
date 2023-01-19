@@ -44,11 +44,12 @@ class _LiveLocationPageState extends State<LiveLocation1Page> {
   void initState() {
     super.initState();
     _mapController = MapController();
+    initLocationService();
     Timer.periodic(Duration(seconds: 5), (timer)
     {
       //print("********************************************************************");
 
-      initLocationService();
+
       connection();
 
       //print("********************************************************************");
@@ -161,7 +162,14 @@ class _LiveLocationPageState extends State<LiveLocation1Page> {
       body: Padding(
         padding: const EdgeInsets.all(8),
 
-        child: Column(
+        //child:
+    //     SingleChildScrollView(
+    //     scrollDirection: Axis.horizontal,
+    // child:
+    // SingleChildScrollView(
+    // scrollDirection: Axis.vertical,
+    child:
+        Column(
           children: [
 
             Flexible(

@@ -40,7 +40,12 @@ class _AddUserState extends State<AddUser> {
     return Scaffold(
         appBar: AppBar(title: const Text('Add User')),
         drawer: buildDrawer(context, AddUser.route),
-        body:
+        body:SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child:
+    SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    child:
       Column(
           children: <Widget>[
           DropdownButton<String>(
@@ -124,7 +129,7 @@ class _AddUserState extends State<AddUser> {
 
                 })
         ]
-      ),
+      ))),
     );
   }
   void getRoles(){

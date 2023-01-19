@@ -91,7 +91,14 @@ class MarkerEventPageState extends State< MarkerEventPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Events Points')),
       drawer: buildDrawer(context, MarkerEventPage.route),
-      body: Padding(
+      body:
+    SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child:
+    SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    child:
+      Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [
@@ -150,7 +157,7 @@ class MarkerEventPageState extends State< MarkerEventPage> {
           ],
         ),
       ),
-    );
+    )));
   }
   var infoWindowVisible = false;
   late GlobalKey<State> key;

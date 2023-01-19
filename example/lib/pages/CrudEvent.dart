@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'package:flutter_map_example/pages/updateEvent.dart';
 import 'package:flutter_map_example/pages/users/Users.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import '../widgets/drawer.dart';
 import 'CRudCategory.dart';
@@ -13,7 +14,20 @@ import 'LoginScreen.dart';
 import 'Param.dart';
 import 'package:flutter_map_example/pages/CRudCategory.dart';
 
-
+bool _isLoading = false;
+const spinkit = SpinKitRotatingCircle(
+  color: Colors.white,
+  size: 50.0,
+);
+final spinkit2 = SpinKitFadingCircle(
+  itemBuilder: (BuildContext context, int index) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: index.isEven ? Colors.grey : Colors.blue,
+      ),
+    );
+  },
+);
 class CrudEvent extends StatefulWidget {
 
   static const String route = 'CrudEvent';
@@ -92,15 +106,20 @@ class _CrudEventState extends State<CrudEvent> {
               )]
         ),
         drawer: buildDrawer(context, CrudEvent.route),
-        body:
+        body:SingleChildScrollView(
+    child:
         Center(
-        child: Column(
-            children: <Widget>[
+          child:
+          Column(
+              children:<Widget> [
+              if(!_isLoading)...[
+        spinkit2
+        ]else...[
 
               const ListTile(
                 title:  Center(child:  Text("Gestion des événements \n",
                   style:  TextStyle(
-                      fontSize: 45 , color: Colors.black),
+                      fontSize: 25 , color: Colors.black),
                 )),
               ),
               SizedBox(
@@ -130,6 +149,12 @@ class _CrudEventState extends State<CrudEvent> {
               const ListTile(
                 title:  Center(child:  Text("\n")),
               ),
+    SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child:
+    SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    child:
               DataTable(
                 onSelectAll: (b) {},
                 sortColumnIndex: 0,
@@ -219,17 +244,18 @@ class _CrudEventState extends State<CrudEvent> {
                 )
                     .toList(),
               )
-            ]
-        )));
+    ))]]
+        ))));
   }
   void getCate() {
-
+   _isLoading = false;
     http.get(Uri.parse(Param.UrlAllEvent))
         .then((resp) {
       setState(() {
         var jsonData = json.decode(resp.body);
         eventes = jsonData['positionDTOSList'] as List;
         print(eventes);
+        _isLoading = true;
       });
     }).catchError((error) {
       print(error);

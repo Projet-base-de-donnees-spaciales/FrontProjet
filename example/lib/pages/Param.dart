@@ -7,7 +7,7 @@ import 'package:flutter_map_example/pages/updateCategory.dart';
 import 'package:http/http.dart' as http;
 
 class Param {
- static String baseurl="http://192.168.11.107:8080";
+ static String baseurl="http://192.168.161.50:8080";
  static String socketUrl=baseurl+"/sgbds-endpoint";
  static String UrlAddCat = baseurl +"/Category/Add";
  static String UrlAllCat = baseurl+"/Category/getAll";

@@ -64,8 +64,9 @@ class _UsersState extends State<Users> {
             )]
         ),
       drawer: buildDrawer(context, Users.route),
-      body:
-      Center(
+      body:SingleChildScrollView(
+    child:
+          Center(
       child: Column(
     children:<Widget> [
       if(!_isLoading)...[
@@ -74,7 +75,7 @@ class _UsersState extends State<Users> {
         const ListTile(
           title:  Center(child:  Text("Gestion des utilisateurs \n",
             style:  TextStyle(
-                fontSize: 45 , color: Colors.black),
+                fontSize: 25 , color: Colors.black),
           )),
         ),
         SizedBox(
@@ -99,6 +100,12 @@ class _UsersState extends State<Users> {
         , const ListTile(
           title:  Center(child:  Text("\n")),
         ),
+    SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child:
+    SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    child:
         DataTable(
           onSelectAll: (b) {},
           sortColumnIndex: 0,
@@ -162,10 +169,12 @@ class _UsersState extends State<Users> {
                       ).toList(),
 
           ),
-    ]
+    ))]
     ,
     ]
-      )));
+      )))
+    )
+    ;
   }
 
   void getUsers(){

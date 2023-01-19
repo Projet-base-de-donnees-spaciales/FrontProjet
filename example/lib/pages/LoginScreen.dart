@@ -41,47 +41,53 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Authentifation')),
       body:
-      Column(
-        children: <Widget>[
+      // SingleChildScrollView(
+      //   scrollDirection: Axis.horizontal,
+      //     child:
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child:
+                  Column(
+          children: <Widget>[
 
-                        Icon(Icons.flutter_dash,
-                            size: 60, color: Color(0xff21579C)),
-                        SizedBox(height: 25),
-                        Text(
-                          "Welcome,",
-                          style: TextStyle(
-                              color: Colors.black, fontSize: 35),
-                        ),
-                        Text(
-                          "Sign in to continue",
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontSize: 35),
-                        ),
+                          Icon(Icons.flutter_dash,
+                              size: 60, color: Color(0xff21579C)),
+                          SizedBox(height: 25),
+                          Text(
+                            "Welcome,",
+                            style: TextStyle(
+                                color: Colors.black, fontSize: 35),
+                          ),
+                          Text(
+                            "Sign in to continue",
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.7),
+                                fontSize: 35),
+                          ),
 
-                SizedBox(height: 50),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  child: Column(
-                    children: [
-                      EmailField(
-                          fadeEmail: _elementsOpacity == 0,
-                          emailController: emailController),
-                      SizedBox(height: 40),
-                      PasswordField(
-                          fadePassword: _elementsOpacity == 0,
-                          passwordController: passwordController),
-                      SizedBox(height: 60),
-                      ElevatedButton(
-                        onPressed: () { goRedirection(emailController,passwordController); }
+                  SizedBox(height: 50),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30.0),
+                    child: Column(
+                      children: [
+                        EmailField(
+                            fadeEmail: _elementsOpacity == 0,
+                            emailController: emailController),
+                        SizedBox(height: 40),
+                        PasswordField(
+                            fadePassword: _elementsOpacity == 0,
+                            passwordController: passwordController),
+                        SizedBox(height: 60),
+                        ElevatedButton(
+                          onPressed: () { goRedirection(emailController,passwordController); }
 
-                        , child: Text('Se Connecter'),
-                      )
-                    ],
+                          , child: Text('Se Connecter'),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              )),
     );
   }
  void goRedirection(   TextEditingController emailController, TextEditingController passwordController){

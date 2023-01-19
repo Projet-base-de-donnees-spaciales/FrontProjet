@@ -14,6 +14,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "archive",
+      "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.3.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "args",
       "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.3.1",
       "packageUri": "lib/",
@@ -86,6 +92,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_launcher_icons",
+      "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.9.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1",
       "packageUri": "lib/",
@@ -126,6 +138,12 @@
       "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "image",
+      "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "intl",
@@ -220,6 +238,18 @@
     {
       "name": "path",
       "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-5.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "pointycastle",
+      "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/pointycastle-3.6.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -398,6 +428,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/xml-6.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "yaml",
       "rootUri": "file:///D:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/yaml-3.1.1",
       "packageUri": "lib/",
@@ -410,7 +446,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-01-15T11:11:26.935514Z",
+  "generated": "2023-01-19T14:43:19.984963Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }

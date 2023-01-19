@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map_example/pages/tap_to_add.dart';
 import 'package:flutter_map_example/pages/updateEvent.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import '../widgets/drawer.dart';
 import 'CrudEvent.dart';
@@ -12,6 +13,20 @@ import 'Param.dart';
 import 'TapToAddPageCreateur.dart';
 import 'UpdateCreateur.dart';
 
+bool _isLoading = false;
+const spinkit = SpinKitRotatingCircle(
+  color: Colors.white,
+  size: 50.0,
+);
+final spinkit2 = SpinKitFadingCircle(
+  itemBuilder: (BuildContext context, int index) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: index.isEven ? Colors.grey : Colors.blue,
+      ),
+    );
+  },
+);
 class CreateurEvent extends StatefulWidget {
   dynamic idUser;
   static const String route = 'CreateurEvent';
@@ -42,12 +57,7 @@ class _CreateurState extends State<CreateurEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(title: const Center(child: Text('Events.com')),
-            leading: GestureDetector(
-              onTap: () { /* Write listener code here */ },
-              child: Icon(
-                Icons.menu,  // add custom icons also
-              ),
-            ),
+
             actions: <Widget>[
               Padding(
                   padding: EdgeInsets.only(right: 40.0,top: 11),
@@ -65,14 +75,18 @@ class _CreateurState extends State<CreateurEvent> {
         ),
 
         body:
+        SingleChildScrollView(
+        child:
         Center(
-            child: Column(
-                children: <Widget>[
-
+          child: Column(
+              children:<Widget> [
+              if(!_isLoading)...[
+        spinkit2
+        ]else...[
                   const ListTile(
                     title:  Center(child:  Text("Gestion des événements \n",
                       style:  TextStyle(
-                          fontSize: 45 , color: Colors.black),
+                          fontSize: 25 , color: Colors.black),
                     )),
                   ),
                   SizedBox(
@@ -102,6 +116,12 @@ class _CreateurState extends State<CreateurEvent> {
                   const ListTile(
                     title:  Center(child:  Text("\n")),
                   ),
+    SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child:
+    SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    child:
                   DataTable(
                     onSelectAll: (b) {},
                     sortColumnIndex: 0,
@@ -191,17 +211,18 @@ class _CreateurState extends State<CreateurEvent> {
                     )
                         .toList(),
                   )
-                ]
-            )));
+    ))]]
+            ))));
   }
   void getCate() {
-
+    _isLoading=false;
     http.get(Uri.parse(Param.UrlAllEventUser+idUserr.toString()))
         .then((resp) {
       setState(() {
         var jsonData = json.decode(resp.body);
         eventes = jsonData['positionDTOSList'] as List;
         print(eventes);
+        _isLoading=true;
       });
     }).catchError((error) {
       print(error);
