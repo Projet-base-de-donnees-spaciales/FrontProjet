@@ -24,6 +24,7 @@ class LiveLocation1Page extends StatefulWidget {
 class _LiveLocationPageState extends State<LiveLocation1Page> {
   late List<dynamic> eventes;
   late final markers= <Marker>[];
+  late Marker markerLocation;//= Marker(point: null, builder: (BuildContext context) { const Text("data") });
   late int x=0;
   //final List<Marker> Emarkers = <Marker>[];
   StompClient? stompClient;
@@ -45,12 +46,12 @@ class _LiveLocationPageState extends State<LiveLocation1Page> {
     _mapController = MapController();
     Timer.periodic(Duration(seconds: 5), (timer)
     {
-      print("********************************************************************");
+      //print("********************************************************************");
 
       initLocationService();
       connection();
 
-      print("********************************************************************");
+      //print("********************************************************************");
     });
   }
 
@@ -124,21 +125,36 @@ class _LiveLocationPageState extends State<LiveLocation1Page> {
     } else {
       currentLatLng = LatLng(0, 0);
     }
+    markerLocation=  Marker(
+  width: 80,
+  height: 80,
+  point: currentLatLng,
+  builder: (context) =>
+      Container(
+          child: Tooltip(
+              message: "My location",
+              textStyle: TextStyle(
+                  fontSize: 15, color: Colors.white, fontWeight: FontWeight.normal
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: Colors.blue
+              ),
+              child: const Icon(
+                Icons.location_on,
+                color: Colors.blue,
+                size: 40,
+              )
+          )
+      )
+  ,
+);
 
-    markers.add(
-      Marker(
-        width: 80,
-        height: 80,
-        point: currentLatLng,
-        builder: (context) => const Icon(
-          Icons.location_on,
-          color: Colors.blue,
-          size: 40,
-          semanticLabel: "hhhhhh",
-        ),
-      ),
-    );
-
+    if(markers.contains(markerLocation))
+      {
+        int i=markers.indexOf(markerLocation);
+        markers[i].point=currentLatLng;
+      }else
+        markers.add(markerLocation);
     return Scaffold(
       appBar: AppBar(title: const Text('Getting live events')),
       drawer: buildDrawer(context, LiveLocation1Page.route),
@@ -198,16 +214,33 @@ class _LiveLocationPageState extends State<LiveLocation1Page> {
             print("************************************************");
             print("*************Markers****************************");
             for(int i=0;i<eventes.length;i++){
+              String str="Event : "+eventes[i]['evenementDTO']['name'].toString()+"\nInfos: "+eventes[i]['evenementDTO']['description'].toString()+"\ndate d'expiration: "+eventes[i]['evenementDTO']['date_expiration'].toString();
               print("name of event : "+(i+1).toString() + eventes[i]['evenementDTO']['name'].toString());
               markers.add(Marker(
                   name: eventes[i]['evenementDTO']['name']as String,
                   width: 100,
                   height: 50,
                   point: LatLng(eventes[i]['pointX'] as double,eventes[i]['pointY'] as double),
-                  builder: (ctx) => Icon(
-                    Icons.location_pin,
-                    size: 26.0,
+                  builder: (ctx) => Container(
+                        child: Tooltip(
+                            message: str,
+                            textStyle: TextStyle(
+                                fontSize: 15, color: Colors.white, fontWeight: FontWeight.normal
+                            ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10), color: Colors.green
+                            ),
+                            child:  Icon(
+                                    Icons.location_pin,
+                                    size: 26.0,
+                                    color: Colors.deepPurple,
+                                  )
+                            )
                   )
+                        //     Icon(
+                  //   Icons.location_pin,
+                  //   size: 26.0,
+                  // )
               ));
             }
           }
